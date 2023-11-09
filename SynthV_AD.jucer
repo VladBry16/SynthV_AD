@@ -5,6 +5,10 @@
               pluginFormats="buildStandalone,buildVST3" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="mL4z1X" name="SynthV_AD">
     <GROUP id="{1CAFA5F2-F060-8927-8CED-1526F1FDEFD5}" name="Source">
+      <FILE id="YCFuz8" name="SynthOSC.cpp" compile="1" resource="0" file="Source/SynthOSC.cpp"/>
+      <FILE id="b5l7dO" name="SynthOSC.h" compile="0" resource="0" file="Source/SynthOSC.h"/>
+      <FILE id="lQKPtl" name="Synth.h" compile="0" resource="0" file="Source/Synth.h"/>
+      <FILE id="Z2uIef" name="Synth.cpp" compile="1" resource="0" file="Source/Synth.cpp"/>
       <FILE id="g39k1p" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="SuKLVj" name="PluginProcessor.h" compile="0" resource="0"

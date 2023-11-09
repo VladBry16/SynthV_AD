@@ -595,6 +595,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\SynthOSC.cpp">
+      <Filter>SynthV_AD\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Synth.cpp">
+      <Filter>SynthV_AD\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp">
       <Filter>SynthV_AD\Source</Filter>
     </ClCompile>
@@ -3027,6 +3033,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\SynthOSC.h">
+      <Filter>SynthV_AD\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Synth.h">
+      <Filter>SynthV_AD\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\PluginProcessor.h">
       <Filter>SynthV_AD\Source</Filter>
     </ClInclude>
