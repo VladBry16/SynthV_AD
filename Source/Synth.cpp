@@ -1,5 +1,10 @@
 #include "Synth.h"
 
+Synth::Synth()
+{
+	// Инициализация членов класса
+}
+
 std::vector<float> Synth::generateSineWaveTable()
 {
 	constexpr auto WAVETABLE_LENGHT = 64;
@@ -8,27 +13,33 @@ std::vector<float> Synth::generateSineWaveTable()
 
 	const auto PI = std::atanf(1.f) * 4;
 
-	for (auto i = 0; i < WAVETABLE_LENGHT; ++i) 
+	for (auto i = 0; i < WAVETABLE_LENGHT; ++i)
 	{
-		sineWaveTable[i] = std::sinf(2 * PI * 
+		sineWaveTable[i] = std::sinf(2 * PI *
 			static_cast<float>(i) / static_cast<float>(WAVETABLE_LENGHT));
 	}
 	return sineWaveTable;
 }
 
-void Synth::initializeOscillators() 
+void Synth::initializeOscillators()
 {
 	constexpr auto OSCILLATORS_COUNT = 128;
 
-	const auto waveTable = generateSineWaveTable();
+	const auto waveTableData = generateSineWaveTable();
+
+	// Преобразование std::vector<float> в juce::AudioSampleBuffer
+	juce::AudioSampleBuffer waveTable(1, waveTableData.size());
+	std::copy(waveTableData.begin(), waveTableData.end(), waveTable.getWritePointer(0));
 
 	oscillators.clear();
 	for (auto i = 0; i < OSCILLATORS_COUNT; ++i) {
-		oscillators.emplace_back(waveTable, sampleRate);
+		// Создаем новый экземпляр SynthOSC и добавляем его в вектор
+		oscillators.push_back(SynthOSC(waveTable, sampleRate));
 	}
 }
 
-void Synth::prepareToPlay(double sampleRate) 
+
+void Synth::prepareToPlay(double sampleRate)
 {
 	this->sampleRate = sampleRate;
 
@@ -61,11 +72,11 @@ void Synth::render(juce::AudioBuffer<float>& buffer,
 
 	for (auto& oscillator : oscillators)
 	{
-		if (oscillator.isPlaying()) 
+		if (oscillator.isPlaying())
 		{
 			for (auto sample = startSample; sample < endSample; ++sample)
 			{
-				firstChannel[sample] += oscillator.getSample();
+				firstChannel[sample] += oscillator.getNextSample();
 			}
 		}
 	}
@@ -83,17 +94,18 @@ void Synth::handleMidiEvent(const juce::MidiMessage& midiEvent)
 		const auto oscillatorId = midiEvent.getNoteNumber();
 		const auto frequency = midiNoteNumberToFrequency(oscillatorId);
 		oscillators[oscillatorId].setFrequency(frequency);
+		oscillators[oscillatorId].noteOn();
 	}
 	else if (midiEvent.isNoteOff())
 	{
 		const auto oscillatorId = midiEvent.getNoteNumber();
-		oscillators[oscillatorId].stop();
+		oscillators[oscillatorId].noteOff();
 	}
 	else if (midiEvent.isAllNotesOff())
 	{
 		for (auto& oscillator : oscillators)
 		{
-			oscillator.stop();
+			oscillator.noteOff();
 		}
 	}
 }
