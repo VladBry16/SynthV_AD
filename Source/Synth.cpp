@@ -117,3 +117,35 @@ float Synth::midiNoteNumberToFrequency(int midiNoteNumber)
 	constexpr auto SEMITONES_IN_AN_OCTAVE = 12.f;
 	return A4_FREQUENCY * std::powf(2.f, (midiNoteNumber - A4_NOTE_NUMBER) / SEMITONES_IN_AN_OCTAVE);
 }
+
+void Synth::setAttack(float attack)
+{
+	for (auto& oscillator : oscillators)
+	{
+		oscillator.setAttack(attack);
+	}
+}
+
+void Synth::setDecay(float decay)
+{
+	for (auto& oscillator : oscillators)
+	{
+		oscillator.setDecay(decay);
+	}
+}
+
+void Synth::setSustain(float sustain)
+{
+	for (auto& oscillator : oscillators)
+	{
+		oscillator.setSustain(sustain);
+	}
+}
+
+void Synth::setRelease(float release)
+{
+	for (auto& oscillator : oscillators)
+	{
+		oscillator.setRelease(release);
+	}
+}

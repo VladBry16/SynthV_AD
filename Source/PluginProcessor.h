@@ -24,6 +24,8 @@ public:
     SynthV_ADAudioProcessor();
     ~SynthV_ADAudioProcessor() override;
 
+    Synth& getSynth();
+
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
     void releaseResources() override;

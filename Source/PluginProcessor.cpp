@@ -140,6 +140,11 @@ void SynthV_ADAudioProcessor::setStateInformation (const void* data, int sizeInB
 {
 }
 
+Synth& SynthV_ADAudioProcessor::getSynth()
+{
+    return synth;
+}
+
 //==============================================================================
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {

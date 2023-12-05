@@ -8,6 +8,10 @@ public:
     Synth();
     void prepareToPlay(double sampleRate);
     void processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages);
+    void setAttack(float attack);
+    void setDecay(float decay);
+    void setSustain(float sustain);
+    void setRelease(float release);
 
 private:
     std::vector<SynthOSC> oscillators;
