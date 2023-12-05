@@ -13,6 +13,11 @@ public:
     void setSustain(float sustain);
     void setRelease(float release);
 
+    float getAttack() const;
+    float getDecay() const;
+    float getSustain() const;
+    float getRelease() const;
+
 private:
     std::vector<SynthOSC> oscillators;
     double sampleRate;

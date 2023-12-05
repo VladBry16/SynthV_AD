@@ -595,6 +595,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\ADSRDisplay.cpp">
+      <Filter>SynthV_AD\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\SynthOSC.cpp">
       <Filter>SynthV_AD\Source</Filter>
     </ClCompile>
@@ -3039,6 +3042,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\ADSRDisplay.h">
+      <Filter>SynthV_AD\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\SynthOSC.h">
       <Filter>SynthV_AD\Source</Filter>
     </ClInclude>

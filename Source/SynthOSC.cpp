@@ -68,3 +68,8 @@ void SynthOSC::setRelease(float release)
     params.release = release;
     adsr.setParameters(params);
 }
+
+const juce::ADSR& SynthOSC::getADSR() const
+{
+    return adsr;
+}

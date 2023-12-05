@@ -5,6 +5,8 @@
               pluginFormats="buildStandalone,buildVST3" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="mL4z1X" name="SynthV_AD">
     <GROUP id="{1CAFA5F2-F060-8927-8CED-1526F1FDEFD5}" name="Source">
+      <FILE id="n4uT8X" name="ADSRDisplay.h" compile="0" resource="0" file="Source/ADSRDisplay.h"/>
+      <FILE id="IJogMX" name="ADSRDisplay.cpp" compile="1" resource="0" file="Source/ADSRDisplay.cpp"/>
       <FILE id="YCFuz8" name="SynthOSC.cpp" compile="1" resource="0" file="Source/SynthOSC.cpp"/>
       <FILE id="b5l7dO" name="SynthOSC.h" compile="0" resource="0" file="Source/SynthOSC.h"/>
       <FILE id="lQKPtl" name="Synth.h" compile="0" resource="0" file="Source/Synth.h"/>

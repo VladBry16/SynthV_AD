@@ -16,6 +16,7 @@ public:
     void setDecay(float decay);
     void setSustain(float sustain);
     void setRelease(float release);
+    const juce::ADSR& getADSR() const;
 
 private:
     juce::AudioSampleBuffer waveTable;

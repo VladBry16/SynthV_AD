@@ -139,6 +139,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\ADSRDisplay.cpp"/>
     <ClCompile Include="..\..\Source\SynthOSC.cpp"/>
     <ClCompile Include="..\..\Source\Synth.cpp"/>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
@@ -2409,6 +2410,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_gui_extra.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\ADSRDisplay.h"/>
     <ClInclude Include="..\..\Source\SynthOSC.h"/>
     <ClInclude Include="..\..\Source\Synth.h"/>
     <ClInclude Include="..\..\Source\PluginProcessor.h"/>

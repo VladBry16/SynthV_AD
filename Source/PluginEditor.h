@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "ADSRDisplay.h"
 
 //==============================================================================
 /**
@@ -21,22 +22,26 @@ public:
     SynthV_ADAudioProcessorEditor (SynthV_ADAudioProcessor&);
     ~SynthV_ADAudioProcessorEditor() override;
 
-    //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
     void sliderValueChanged(juce::Slider* slider) override;
 
 private:
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it.
+    
     SynthV_ADAudioProcessor& audioProcessor;
 
-    // Слайдеры для каждого параметра ADSR
+    
     juce::Slider attackSlider;
     juce::Slider decaySlider;
     juce::Slider sustainSlider;
     juce::Slider releaseSlider;
-    SynthOSC oscillator; // Ваш осциллятор
+    ADSRDisplay adsrDisplay;
+
+    
+    juce::Label attackLabel{ "A - Attack", "A - Attack" };
+    juce::Label decayLabel{ "D - Decay", "D - Decay" };
+    juce::Label sustainLabel{ "S - Sustain", "S - Sustain" };
+    juce::Label releaseLabel{ "R - Release", "R - Release" };
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SynthV_ADAudioProcessorEditor)
 };

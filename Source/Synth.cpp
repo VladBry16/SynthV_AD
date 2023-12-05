@@ -149,3 +149,39 @@ void Synth::setRelease(float release)
 		oscillator.setRelease(release);
 	}
 }
+
+float Synth::getAttack() const
+{
+	if (oscillators.empty())
+		return 0.0f;
+
+	// Вернуть значение атаки для первого осциллятора
+	return oscillators[0].getADSR().getParameters().attack;
+}
+
+float Synth::getDecay() const
+{
+	if (oscillators.empty())
+		return 0.0f;
+
+	// Вернуть значение атаки для первого осциллятора
+	return oscillators[0].getADSR().getParameters().decay;
+}
+
+float Synth::getSustain() const
+{
+	if (oscillators.empty())
+		return 0.0f;
+
+	// Вернуть значение атаки для первого осциллятора
+	return oscillators[0].getADSR().getParameters().sustain;
+}
+
+float Synth::getRelease() const
+{
+	if (oscillators.empty())
+		return 0.0f;
+
+	// Вернуть значение атаки для первого осциллятора
+	return oscillators[0].getADSR().getParameters().release;
+}
