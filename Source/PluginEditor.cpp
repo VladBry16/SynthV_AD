@@ -7,13 +7,13 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     sustainLabel("S - Sustain", "S - Sustain"), releaseLabel("R - Release", "R - Release")
 {
     // Установите диапазон, интервал и начальное значение для каждого слайдера
-    attackSlider.setRange(0.1, 1.0);
+    attackSlider.setRange(0.0, 1.0);
     attackSlider.setValue(0.0);
     decaySlider.setRange(0.1, 1.0);
-    decaySlider.setValue(0.0);
-    sustainSlider.setRange(0.1, 1.0);
-    sustainSlider.setValue(0.1);
-    releaseSlider.setRange(0.0, 1.0);
+    decaySlider.setValue(0.1);
+    sustainSlider.setRange(0.0, 1.0);
+    sustainSlider.setValue(0.0);
+    releaseSlider.setRange(0.1, 1.0);
     releaseSlider.setValue(0.1);
 
     // Уберите поле с цифрами около слайдеров
@@ -39,6 +39,21 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     addAndMakeVisible(decayLabel);
     addAndMakeVisible(sustainLabel);
     addAndMakeVisible(releaseLabel);
+
+    addAndMakeVisible(sineWaveButton);
+    addAndMakeVisible(sawWaveButton);
+    addAndMakeVisible(squareWaveButton);
+    addAndMakeVisible(triangleWaveButton);
+
+    sineWaveButton.setButtonText("Sine Wave");
+    sawWaveButton.setButtonText("Saw Wave");
+    squareWaveButton.setButtonText("Square Wave");
+    triangleWaveButton.setButtonText("Triangle Wave");
+
+    sineWaveButton.addListener(this);
+    sawWaveButton.addListener(this);
+    squareWaveButton.addListener(this);
+    triangleWaveButton.addListener(this);
 
     // Добавьте ADSRDisplay на ваш компонент
     addAndMakeVisible(adsrDisplay);
@@ -80,6 +95,11 @@ void SynthV_ADAudioProcessorEditor::resized()
     releaseSlider.setSliderStyle(juce::Slider::Rotary); // Устанавливаем стиль слайдера как Rotary
     releaseSlider.setBounds(padding + sliderSize + padding, padding + sliderSize + padding + 2 * labelHeight, sliderSize, sliderSize);
 
+    sineWaveButton.setBounds(350, 10, 100, 30);
+    sawWaveButton.setBounds(350, 100, 100, 30);
+    squareWaveButton.setBounds(350, 200, 100, 30);
+    triangleWaveButton.setBounds(350, 300, 100, 30);
+
     // Установите положение и размер ADSRDisplay
     adsrDisplay.setBounds(padding, 2 * padding + 2 * sliderSize + 2 * labelHeight, getWidth() - 2 * padding, getHeight() - 3 * padding - 2 * sliderSize - 2 * labelHeight);
 }
@@ -104,4 +124,40 @@ void SynthV_ADAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
     }
     // Перерисуйте ADSRDisplay
     adsrDisplay.repaint();
+}
+
+void SynthV_ADAudioProcessorEditor::buttonClicked(juce::Button* button)
+{
+    if (button == &sineWaveButton)
+    {
+        audioProcessor.getSynth().setWaveTable(Waveform::Sine);
+        sineWaveButton.setColour(juce::TextButton::buttonColourId, juce::Colours::red);
+        sawWaveButton.setColour(juce::TextButton::buttonColourId, juce::Colours::white);
+        squareWaveButton.setColour(juce::TextButton::buttonColourId, juce::Colours::white);
+        triangleWaveButton.setColour(juce::TextButton::buttonColourId, juce::Colours::white);
+    }
+    else if (button == &sawWaveButton)
+    {
+        audioProcessor.getSynth().setWaveTable(Waveform::Saw);
+        sineWaveButton.setColour(juce::TextButton::buttonColourId, juce::Colours::white);
+        sawWaveButton.setColour(juce::TextButton::buttonColourId, juce::Colours::red);
+        squareWaveButton.setColour(juce::TextButton::buttonColourId, juce::Colours::white);
+        triangleWaveButton.setColour(juce::TextButton::buttonColourId, juce::Colours::white);
+    }
+    else if (button == &squareWaveButton)
+    {
+        audioProcessor.getSynth().setWaveTable(Waveform::Square);
+        sineWaveButton.setColour(juce::TextButton::buttonColourId, juce::Colours::white);
+        sawWaveButton.setColour(juce::TextButton::buttonColourId, juce::Colours::white);
+        squareWaveButton.setColour(juce::TextButton::buttonColourId, juce::Colours::red);
+        triangleWaveButton.setColour(juce::TextButton::buttonColourId, juce::Colours::white);
+    }
+    else if (button == &triangleWaveButton)
+    {
+        audioProcessor.getSynth().setWaveTable(Waveform::Triangle);
+        sineWaveButton.setColour(juce::TextButton::buttonColourId, juce::Colours::white);
+        sawWaveButton.setColour(juce::TextButton::buttonColourId, juce::Colours::white);
+        squareWaveButton.setColour(juce::TextButton::buttonColourId, juce::Colours::white);
+        triangleWaveButton.setColour(juce::TextButton::buttonColourId, juce::Colours::red);
+    }
 }

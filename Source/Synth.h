@@ -2,6 +2,14 @@
 #include <JuceHeader.h>
 #include "SynthOSC.h"
 
+enum class Waveform
+{
+    Sine,
+    Saw,
+    Square,
+    Triangle
+};
+
 class Synth
 {
 public:
@@ -18,6 +26,8 @@ public:
     float getSustain() const;
     float getRelease() const;
 
+    void setWaveTable(Waveform waveform);
+
 private:
     std::vector<SynthOSC> oscillators;
     double sampleRate;
@@ -26,4 +36,7 @@ private:
     void handleMidiEvent(const juce::MidiMessage& midiEvent);
     float midiNoteNumberToFrequency(int midiNoteNumber);
     std::vector<float> generateSineWaveTable();
+    std::vector<float> generateSawWaveTable();
+    std::vector<float> generateSquareWaveTable();
+    std::vector<float> generateTriangleWaveTable();
 };

@@ -84,6 +84,10 @@ void SynthV_ADAudioProcessor::changeProgramName (int index, const juce::String& 
 void SynthV_ADAudioProcessor::prepareToPlay (double sampleRate, int)
 {
     synth.prepareToPlay(sampleRate);
+    getSynth().setAttack(0.0);
+    getSynth().setDecay(0.1);
+    getSynth().setSustain(0.0);
+    getSynth().setRelease(0.1);
 }
 
 void SynthV_ADAudioProcessor::releaseResources()

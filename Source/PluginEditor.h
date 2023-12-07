@@ -16,7 +16,7 @@
 /**
 */
 class SynthV_ADAudioProcessorEditor  : public juce::AudioProcessorEditor,
-    public juce::Slider::Listener
+    public juce::Slider::Listener, public juce::Button::Listener
 {
 public:
     SynthV_ADAudioProcessorEditor (SynthV_ADAudioProcessor&);
@@ -25,11 +25,16 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
     void sliderValueChanged(juce::Slider* slider) override;
+    void buttonClicked(juce::Button* button) override;
 
 private:
     
     SynthV_ADAudioProcessor& audioProcessor;
 
+    juce::TextButton sineWaveButton;
+    juce::TextButton sawWaveButton;
+    juce::TextButton squareWaveButton;
+    juce::TextButton triangleWaveButton;
     
     juce::Slider attackSlider;
     juce::Slider decaySlider;

@@ -73,3 +73,8 @@ const juce::ADSR& SynthOSC::getADSR() const
 {
     return adsr;
 }
+
+void SynthOSC::setWaveTable(juce::AudioSampleBuffer waveTable)
+{
+    this->waveTable = std::move(waveTable);
+}

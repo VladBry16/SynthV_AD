@@ -21,6 +21,49 @@ std::vector<float> Synth::generateSineWaveTable()
 	return sineWaveTable;
 }
 
+std::vector<float> Synth::generateSawWaveTable()
+{
+	constexpr auto WAVETABLE_LENGHT = 64;
+
+	std::vector<float> sawWaveTable(WAVETABLE_LENGHT);
+
+	for (auto i = 0; i < WAVETABLE_LENGHT; ++i)
+	{
+		sawWaveTable[i] = 1.0 - (2.0 * i / WAVETABLE_LENGHT);
+	}
+
+	return sawWaveTable;
+}
+
+std::vector<float> Synth::generateSquareWaveTable()
+{
+	constexpr auto WAVETABLE_LENGHT = 64;
+
+	std::vector<float> squareWaveTable(WAVETABLE_LENGHT);
+
+	for (auto i = 0; i < WAVETABLE_LENGHT; ++i)
+	{
+		squareWaveTable[i] = i < WAVETABLE_LENGHT / 3 ? 1.0 : -1.0;
+	}
+
+	return squareWaveTable;
+}
+
+std::vector<float> Synth::generateTriangleWaveTable()
+{
+	constexpr auto WAVETABLE_LENGHT = 64;
+
+	std::vector<float> triangleWaveTable(WAVETABLE_LENGHT);
+
+	for (auto i = 0; i < WAVETABLE_LENGHT; ++i)
+	{
+		triangleWaveTable[i] = 2.0 * std::abs(2.0 * ((i / static_cast<double>(WAVETABLE_LENGHT)) - std::round(i / static_cast<double>(WAVETABLE_LENGHT))) + 0.75) - 1.0;
+	}
+
+	return triangleWaveTable;
+}
+
+
 void Synth::initializeOscillators()
 {
 	constexpr auto OSCILLATORS_COUNT = 128;
@@ -185,3 +228,33 @@ float Synth::getRelease() const
 	// Вернуть значение атаки для первого осциллятора
 	return oscillators[0].getADSR().getParameters().release;
 }
+
+void Synth::setWaveTable(Waveform waveform)
+{
+	std::vector<float> waveTableData;
+
+	switch (waveform)
+	{
+	case Waveform::Sine:
+		waveTableData = generateSineWaveTable();
+		break;
+	case Waveform::Saw:
+		waveTableData = generateSawWaveTable();
+		break;
+	case Waveform::Square:
+		waveTableData = generateSquareWaveTable();
+		break;
+	case Waveform::Triangle:
+		waveTableData = generateTriangleWaveTable();
+		break;
+	}
+
+	// Преобразование std::vector<float> в juce::AudioSampleBuffer
+	juce::AudioSampleBuffer waveTable(1, waveTableData.size());
+	std::copy(waveTableData.begin(), waveTableData.end(), waveTable.getWritePointer(0));
+
+	for (auto& oscillator : oscillators) {
+		oscillator.setWaveTable(waveTable);
+	}
+}
+

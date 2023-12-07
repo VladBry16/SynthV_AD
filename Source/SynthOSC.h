@@ -10,13 +10,17 @@ public:
     void setFrequency(float frequency);
     float getNextSample();
     void noteOn();
-    void noteOff();  // Убедитесь, что эта функция объявлена здесь
+    void noteOff();
     bool isPlaying() const;
+    
     void setAttack(float attack);
     void setDecay(float decay);
     void setSustain(float sustain);
     void setRelease(float release);
+    
     const juce::ADSR& getADSR() const;
+
+    void setWaveTable(juce::AudioSampleBuffer waveTable);
 
 private:
     juce::AudioSampleBuffer waveTable;
