@@ -26,9 +26,12 @@ public:
     void resized() override;
     void sliderValueChanged(juce::Slider* slider) override;
     void buttonClicked(juce::Button* button) override;
+    void selectWave(int x);
 
 private:
     
+    int x = 1;
+
     SynthV_ADAudioProcessor& audioProcessor;
 
     juce::TextButton sineWaveButton;
