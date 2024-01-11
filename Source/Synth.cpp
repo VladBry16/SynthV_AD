@@ -70,13 +70,13 @@ void Synth::initializeOscillators()
 
 	const auto waveTableData = generateSineWaveTable();
 
-	// Преобразование std::vector<float> в juce::AudioSampleBuffer
+	// ГЏГ°ГҐГ®ГЎГ°Г Г§Г®ГўГ Г­ГЁГҐ std::vector<float> Гў juce::AudioSampleBuffer
 	juce::AudioSampleBuffer waveTable(1, waveTableData.size());
 	std::copy(waveTableData.begin(), waveTableData.end(), waveTable.getWritePointer(0));
 
 	oscillators.clear();
 	for (auto i = 0; i < OSCILLATORS_COUNT; ++i) {
-		// Создаем новый экземпляр SynthOSC и добавляем его в вектор
+		// Г‘Г®Г§Г¤Г ГҐГ¬ Г­Г®ГўГ»Г© ГЅГЄГ§ГҐГ¬ГЇГ«ГїГ° SynthOSC ГЁ Г¤Г®ГЎГ ГўГ«ГїГҐГ¬ ГҐГЈГ® Гў ГўГҐГЄГІГ®Г°
 		oscillators.push_back(SynthOSC(waveTable, sampleRate));
 	}
 }
@@ -170,7 +170,7 @@ void Synth::handleMidiEvent(const juce::MidiMessage& midiEvent)
 		const auto controllerNumber = midiEvent.getControllerNumber();
 		const auto controllerValue = midiEvent.getControllerValue();
 
-		// Обработка сообщения о контроле изменения
+		// ГЋГЎГ°Г ГЎГ®ГІГЄГ  Г±Г®Г®ГЎГ№ГҐГ­ГЁГї Г® ГЄГ®Г­ГІГ°Г®Г«ГҐ ГЁГ§Г¬ГҐГ­ГҐГ­ГЁГї
 		switch (controllerNumber)
 		{
 		case 1: // CC1 - Modulation Wheel
@@ -236,7 +236,7 @@ float Synth::getAttack() const
 	if (oscillators.empty())
 		return 0.0f;
 
-	// Вернуть значение атаки для первого осциллятора
+	// Г‚ГҐГ°Г­ГіГІГј Г§Г­Г Г·ГҐГ­ГЁГҐ Г ГІГ ГЄГЁ Г¤Г«Гї ГЇГҐГ°ГўГ®ГЈГ® Г®Г±Г¶ГЁГ«Г«ГїГІГ®Г°Г 
 	return oscillators[0].getADSR().getParameters().attack;
 }
 
@@ -245,7 +245,7 @@ float Synth::getDecay() const
 	if (oscillators.empty())
 		return 0.0f;
 
-	// Вернуть значение атаки для первого осциллятора
+	// Г‚ГҐГ°Г­ГіГІГј Г§Г­Г Г·ГҐГ­ГЁГҐ Г ГІГ ГЄГЁ Г¤Г«Гї ГЇГҐГ°ГўГ®ГЈГ® Г®Г±Г¶ГЁГ«Г«ГїГІГ®Г°Г 
 	return oscillators[0].getADSR().getParameters().decay;
 }
 
@@ -254,7 +254,7 @@ float Synth::getSustain() const
 	if (oscillators.empty())
 		return 0.0f;
 
-	// Вернуть значение атаки для первого осциллятора
+	// Г‚ГҐГ°Г­ГіГІГј Г§Г­Г Г·ГҐГ­ГЁГҐ Г ГІГ ГЄГЁ Г¤Г«Гї ГЇГҐГ°ГўГ®ГЈГ® Г®Г±Г¶ГЁГ«Г«ГїГІГ®Г°Г 
 	return oscillators[0].getADSR().getParameters().sustain;
 }
 
@@ -263,7 +263,7 @@ float Synth::getRelease() const
 	if (oscillators.empty())
 		return 0.0f;
 
-	// Вернуть значение атаки для первого осциллятора
+	// Г‚ГҐГ°Г­ГіГІГј Г§Г­Г Г·ГҐГ­ГЁГҐ Г ГІГ ГЄГЁ Г¤Г«Гї ГЇГҐГ°ГўГ®ГЈГ® Г®Г±Г¶ГЁГ«Г«ГїГІГ®Г°Г 
 	return oscillators[0].getADSR().getParameters().release;
 }
 
@@ -287,7 +287,7 @@ void Synth::setWaveTable(Waveform waveform)
 		break;
 	}
 
-	// Преобразование std::vector<float> в juce::AudioSampleBuffer
+	// ГЏГ°ГҐГ®ГЎГ°Г Г§Г®ГўГ Г­ГЁГҐ std::vector<float> Гў juce::AudioSampleBuffer
 	juce::AudioSampleBuffer waveTable(1, waveTableData.size());
 	std::copy(waveTableData.begin(), waveTableData.end(), waveTable.getWritePointer(0));
 

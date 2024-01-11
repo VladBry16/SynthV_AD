@@ -610,6 +610,9 @@
     <ClCompile Include="..\..\Source\PluginEditor.cpp">
       <Filter>SynthV_AD\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\CustomLookAndFeel.cpp">
+      <Filter>SynthV_AD\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.cpp">
       <Filter>JUCE Modules\juce_audio_basics\audio_play_head</Filter>
     </ClCompile>
@@ -3058,6 +3061,9 @@
       <Filter>SynthV_AD\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PluginEditor.h">
+      <Filter>SynthV_AD\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\CustomLookAndFeel.h">
       <Filter>SynthV_AD\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\..\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h">
@@ -5921,10 +5927,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\Downloads\Gradient.png">
+    <None Include="..\..\..\..\Downloads\Piano.png">
       <Filter>SynthV_AD\Source</Filter>
     </None>
-    <None Include="..\..\..\..\Downloads\Piano.png">
+    <None Include="..\..\..\..\Downloads\Krutilka.png">
+      <Filter>SynthV_AD\Source</Filter>
+    </None>
+    <None Include="..\..\..\..\Downloads\Gradient.png">
       <Filter>SynthV_AD\Source</Filter>
     </None>
     <None Include="..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt">

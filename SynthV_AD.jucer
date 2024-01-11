@@ -13,13 +13,18 @@
       <FILE id="Z2uIef" name="Synth.cpp" compile="1" resource="0" file="Source/Synth.cpp"/>
       <FILE id="g39k1p" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
+      <FILE id="y6GgeN" name="Piano.png" compile="0" resource="1" file="../../Downloads/Piano.png"/>
+      <FILE id="YJgZma" name="Krutilka.png" compile="0" resource="1" file="../../Downloads/Krutilka.png"/>
       <FILE id="SuKLVj" name="PluginProcessor.h" compile="0" resource="0"
             file="Source/PluginProcessor.h"/>
       <FILE id="X9EwjR" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="JKwLlx" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
       <FILE id="eeP1Gv" name="Gradient.png" compile="0" resource="1" file="../../Downloads/Gradient.png"/>
-      <FILE id="bVZgCB" name="Piano.png" compile="0" resource="1" file="../../Downloads/Piano.png"/>
+      <FILE id="pOYI2s" name="CustomLookAndFeel.cpp" compile="1" resource="0"
+            file="Source/CustomLookAndFeel.cpp"/>
+      <FILE id="xIpqxL" name="CustomLookAndFeel.h" compile="0" resource="0"
+            file="Source/CustomLookAndFeel.h"/>
     </GROUP>
   </MAINGROUP>
   <MODULES>

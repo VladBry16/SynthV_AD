@@ -1,6 +1,8 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include "JuceHeader.h"
+#include "CustomLookAndFeel.h"
+
 
 SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p), adsrDisplay(p.getSynth()),
@@ -8,6 +10,15 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     sustainLabel("S - Sustain", "S - Sustain"), releaseLabel("R - Release", "R - Release"), 
     keyboardComponent(p.getSynth().getKeyboardState(), juce::MidiKeyboardComponent::horizontalKeyboard)
 {
+    // Создайте экземпляр CustomLookAndFeel
+    customLookAndFeel = std::make_unique<CustomLookAndFeel>();
+
+    // Примените CustomLookAndFeel к слайдерам
+    attackSlider.setLookAndFeel(customLookAndFeel.get());
+    decaySlider.setLookAndFeel(customLookAndFeel.get());
+    sustainSlider.setLookAndFeel(customLookAndFeel.get());
+    releaseSlider.setLookAndFeel(customLookAndFeel.get());
+
     // Установите диапазон, интервал и начальное значение для каждого слайдера
     attackSlider.setRange(0.0, 1.0);
     attackSlider.setValue(audioProcessor.getSynth().getAttack());
@@ -84,7 +95,7 @@ void SynthV_ADAudioProcessorEditor::resized()
 {
     // Здесь вы можете установить положение и размер слайдеров
     // Например:
-    int sliderSize = 150; // Увеличиваем размер слайдера
+    int sliderSize = 72; // Увеличиваем размер слайдера
     int padding = 10; // Отступ между слайдерами
     int labelHeight = 20; // Высота метки
 
@@ -110,10 +121,10 @@ void SynthV_ADAudioProcessorEditor::resized()
     squareWaveButton.setBounds(350, 200, 100, 30);
     triangleWaveButton.setBounds(350, 300, 100, 30);
 
-    keyboardComponent.setBounds(getLocalBounds().removeFromBottom(100).reduced(100, 0));;
+    keyboardComponent.setBounds(getLocalBounds().removeFromBottom(80).reduced(100, 0));;
 
     // Установите положение и размер ADSRDisplay
-    adsrDisplay.setBounds(padding, 2 * padding + 2 * sliderSize + 2 * labelHeight, getWidth() - 2 * padding, getHeight() - 3 * padding - 2 * sliderSize - 2 * labelHeight);
+    adsrDisplay.setBounds(564, 46, 330, 194);
 }
 
 void SynthV_ADAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)

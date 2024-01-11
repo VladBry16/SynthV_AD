@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "ADSRDisplay.h"
+#include "CustomLookAndFeel.h"
 
 //==============================================================================
 /**
@@ -31,6 +32,8 @@ public:
 private:
     
     int x = 1;
+
+    std::unique_ptr<CustomLookAndFeel> customLookAndFeel;
 
     SynthV_ADAudioProcessor& audioProcessor;
 
