@@ -18,6 +18,8 @@
       <FILE id="X9EwjR" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="JKwLlx" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <FILE id="eeP1Gv" name="Gradient.png" compile="0" resource="1" file="../../Downloads/Gradient.png"/>
+      <FILE id="bVZgCB" name="Piano.png" compile="0" resource="1" file="../../Downloads/Piano.png"/>
     </GROUP>
   </MAINGROUP>
   <MODULES>

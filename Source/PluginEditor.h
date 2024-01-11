@@ -51,5 +51,7 @@ private:
     juce::Label sustainLabel{ "S - Sustain", "S - Sustain" };
     juce::Label releaseLabel{ "R - Release", "R - Release" };
 
+    juce::MidiKeyboardComponent keyboardComponent;
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SynthV_ADAudioProcessorEditor)
 };

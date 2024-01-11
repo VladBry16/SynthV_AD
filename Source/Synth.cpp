@@ -2,7 +2,7 @@
 
 Synth::Synth()
 {
-	// Инициализация членов класса
+	keyboardState.addListener(this);
 }
 
 std::vector<float> Synth::generateSineWaveTable()
@@ -130,6 +130,20 @@ void Synth::render(juce::AudioBuffer<float>& buffer,
 	}
 }
 
+void Synth::handleNoteOn(juce::MidiKeyboardState* source, int midiChannel, int midiNoteNumber, float velocity)
+{
+	const auto oscillatorId = midiNoteNumber;
+	const auto frequency = midiNoteNumberToFrequency(oscillatorId);
+	oscillators[oscillatorId].setFrequency(frequency);
+	oscillators[oscillatorId].noteOn();
+}
+
+void Synth::handleNoteOff(juce::MidiKeyboardState* source, int midiChannel, int midiNoteNumber, float velocity)
+{
+	const auto oscillatorId = midiNoteNumber;
+	oscillators[oscillatorId].noteOff();
+}
+
 void Synth::handleMidiEvent(const juce::MidiMessage& midiEvent)
 {
 	if (midiEvent.isNoteOn())
@@ -149,6 +163,30 @@ void Synth::handleMidiEvent(const juce::MidiMessage& midiEvent)
 		for (auto& oscillator : oscillators)
 		{
 			oscillator.noteOff();
+		}
+	}
+	else if (midiEvent.isController())
+	{
+		const auto controllerNumber = midiEvent.getControllerNumber();
+		const auto controllerValue = midiEvent.getControllerValue();
+
+		// Обработка сообщения о контроле изменения
+		switch (controllerNumber)
+		{
+		case 1: // CC1 - Modulation Wheel
+			setAttack(controllerValue / 127.0f);
+			break;
+		case 2: // CC2 - Breath controller
+			setDecay(controllerValue / 127.0f);
+			break;
+		case 7: // CC7 - Channel Volume
+			setSustain(controllerValue / 127.0f);
+			break;
+		case 11: // CC11 - Expression Controller
+			setRelease(controllerValue / 127.0f);
+			break;
+		default:
+			break;
 		}
 	}
 }

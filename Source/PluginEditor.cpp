@@ -1,10 +1,12 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "JuceHeader.h"
 
 SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p), adsrDisplay(p.getSynth()),
     attackLabel("A - Attack", "A - Attack"), decayLabel("D - Decay", "D - Decay"),
-    sustainLabel("S - Sustain", "S - Sustain"), releaseLabel("R - Release", "R - Release")
+    sustainLabel("S - Sustain", "S - Sustain"), releaseLabel("R - Release", "R - Release"), 
+    keyboardComponent(p.getSynth().getKeyboardState(), juce::MidiKeyboardComponent::horizontalKeyboard)
 {
     // Установите диапазон, интервал и начальное значение для каждого слайдера
     attackSlider.setRange(0.0, 1.0);
@@ -55,6 +57,8 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     squareWaveButton.addListener(this);
     triangleWaveButton.addListener(this);
 
+    addAndMakeVisible(keyboardComponent);
+
     // Добавьте ADSRDisplay на ваш компонент
     addAndMakeVisible(adsrDisplay);
 
@@ -69,7 +73,11 @@ SynthV_ADAudioProcessorEditor::~SynthV_ADAudioProcessorEditor()
 
 void SynthV_ADAudioProcessorEditor::paint(juce::Graphics& g)
 {
-    g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
+    juce::Image background = juce::ImageCache::getFromMemory(BinaryData::Gradient_png, BinaryData::Gradient_pngSize);
+    g.drawImageAt(background, 0, 0);
+    juce::Image neon = juce::ImageCache::getFromMemory(BinaryData::Piano_png, BinaryData::Piano_pngSize);
+    int imageY = getHeight() - neon.getHeight(); // Расчет координаты Y для размещения изображения внизу
+    g.drawImageAt(neon, 0, imageY);
 }
 
 void SynthV_ADAudioProcessorEditor::resized()
@@ -101,6 +109,8 @@ void SynthV_ADAudioProcessorEditor::resized()
     sawWaveButton.setBounds(350, 100, 100, 30);
     squareWaveButton.setBounds(350, 200, 100, 30);
     triangleWaveButton.setBounds(350, 300, 100, 30);
+
+    keyboardComponent.setBounds(getLocalBounds().removeFromBottom(100).reduced(100, 0));;
 
     // Установите положение и размер ADSRDisplay
     adsrDisplay.setBounds(padding, 2 * padding + 2 * sliderSize + 2 * labelHeight, getWidth() - 2 * padding, getHeight() - 3 * padding - 2 * sliderSize - 2 * labelHeight);

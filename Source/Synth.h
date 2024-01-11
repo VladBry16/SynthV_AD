@@ -10,7 +10,7 @@ enum class Waveform
     Triangle
 };
 
-class Synth
+class Synth : public juce::MidiKeyboardStateListener
 {
 public:
     Synth();
@@ -28,6 +28,11 @@ public:
 
     void setWaveTable(Waveform waveform);
 
+    juce::MidiKeyboardState& getKeyboardState() { return keyboardState; }
+
+    void handleNoteOn(juce::MidiKeyboardState* source, int midiChannel, int midiNoteNumber, float velocity) override;
+    void handleNoteOff(juce::MidiKeyboardState* source, int midiChannel, int midiNoteNumber, float velocity) override;
+
 private:
     std::vector<SynthOSC> oscillators;
     double sampleRate;
@@ -39,4 +44,5 @@ private:
     std::vector<float> generateSawWaveTable();
     std::vector<float> generateSquareWaveTable();
     std::vector<float> generateTriangleWaveTable();
+    juce::MidiKeyboardState keyboardState;
 };
