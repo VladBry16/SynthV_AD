@@ -119,7 +119,7 @@ void Synth::render(juce::AudioBuffer<float>& buffer,
 		{
 			for (auto sample = startSample; sample < endSample; ++sample)
 			{
-				firstChannel[sample] += oscillator.getNextSample();
+				firstChannel[sample] += volume * oscillator.getNextSample();
 			}
 		}
 	}
@@ -294,5 +294,13 @@ void Synth::setWaveTable(Waveform waveform)
 	for (auto& oscillator : oscillators) {
 		oscillator.setWaveTable(waveTable);
 	}
+}
+
+void Synth::setVolume(float newVolume) {
+	volume = newVolume;
+}
+
+float Synth::getVolume() const {
+	return volume;
 }
 

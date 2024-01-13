@@ -48,6 +48,7 @@ private:
     juce::Slider releaseSlider;
     ADSRDisplay adsrDisplay;
 
+    juce::Slider volumeSlider;
     
     juce::Label attackLabel{ "A - Attack", "A - Attack" };
     juce::Label decayLabel{ "D - Decay", "D - Decay" };

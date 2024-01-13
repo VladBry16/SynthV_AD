@@ -28,6 +28,10 @@ public:
 
     void setWaveTable(Waveform waveform);
 
+    void setVolume(float newVolume);
+    float getVolume() const;
+
+
     juce::MidiKeyboardState& getKeyboardState() { return keyboardState; }
 
     void handleNoteOn(juce::MidiKeyboardState* source, int midiChannel, int midiNoteNumber, float velocity) override;
@@ -45,4 +49,5 @@ private:
     std::vector<float> generateSquareWaveTable();
     std::vector<float> generateTriangleWaveTable();
     juce::MidiKeyboardState keyboardState;
+    float volume = 1.0f;
 };

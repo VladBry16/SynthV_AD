@@ -29,6 +29,12 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     releaseSlider.setRange(0.1, 1.0);
     releaseSlider.setValue(audioProcessor.getSynth().getRelease());
 
+    volumeSlider.setRange(0.0, 1.0); // Установите диапазон для слайдера громкости
+    volumeSlider.setValue(audioProcessor.getSynth().getVolume()); // Установите начальное значение слайдера громкости
+    volumeSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0); // Уберите поле с цифрами около слайдера громкости
+    addAndMakeVisible(volumeSlider); // Добавьте слайдер громкости на ваш компонент
+    volumeSlider.addListener(this); // Добавьте слушателя для слайдера громкости
+
     // Уберите поле с цифрами около слайдеров
     attackSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
     decaySlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
@@ -121,6 +127,8 @@ void SynthV_ADAudioProcessorEditor::resized()
     squareWaveButton.setBounds(350, 200, 100, 30);
     triangleWaveButton.setBounds(350, 300, 100, 30);
 
+    volumeSlider.setBounds(300, 100, 72, 72);
+
     keyboardComponent.setBounds(getLocalBounds().removeFromBottom(80).reduced(100, 0));;
 
     // Установите положение и размер ADSRDisplay
@@ -144,6 +152,10 @@ void SynthV_ADAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
     if (slider == &releaseSlider)
     {
         audioProcessor.getSynth().setRelease(releaseSlider.getValue());
+    }
+    if (slider == &volumeSlider)
+    {
+        audioProcessor.getSynth().setVolume(volumeSlider.getValue());
     }
     // Перерисуйте ADSRDisplay
     adsrDisplay.repaint();
