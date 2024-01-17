@@ -5936,6 +5936,9 @@
     <None Include="..\..\Source\pics\Piano.png">
       <Filter>SynthV_AD\Source</Filter>
     </None>
+    <None Include="..\..\Source\pics\Group.png">
+      <Filter>SynthV_AD\Source</Filter>
+    </None>
     <None Include="..\..\Source\pics\Krutilka.png">
       <Filter>SynthV_AD\Source</Filter>
     </None>

@@ -3376,6 +3376,7 @@
     <None Include="..\..\Source\pics\Gradient.png"/>
     <None Include="..\..\Source\pics\Points.png"/>
     <None Include="..\..\Source\pics\Piano.png"/>
+    <None Include="..\..\Source\pics\Group.png"/>
     <None Include="..\..\Source\pics\Krutilka.png"/>
     <None Include="..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt"/>
     <None Include="..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\README.md"/>

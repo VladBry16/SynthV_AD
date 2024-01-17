@@ -10,6 +10,7 @@
       <FILE id="isYCCO" name="Points.png" compile="0" resource="1" file="Source/pics/Points.png"/>
       <FILE id="IJogMX" name="ADSRDisplay.cpp" compile="1" resource="0" file="Source/ADSRDisplay.cpp"/>
       <FILE id="SOKMLZ" name="Piano.png" compile="0" resource="1" file="Source/pics/Piano.png"/>
+      <FILE id="NNLmT7" name="Group.png" compile="0" resource="1" file="Source/pics/Group.png"/>
       <FILE id="W6Tncb" name="Krutilka.png" compile="0" resource="1" file="Source/pics/Krutilka.png"/>
       <FILE id="YCFuz8" name="SynthOSC.cpp" compile="1" resource="0" file="Source/SynthOSC.cpp"/>
       <FILE id="b5l7dO" name="SynthOSC.h" compile="0" resource="0" file="Source/SynthOSC.h"/>

@@ -15,23 +15,26 @@ void ADSRDisplay::paint(juce::Graphics& g)
     auto sustain = synth.getSustain();
     auto release = synth.getRelease();
 
-    float decayX = juce::jmax(attack, decay);
-    float sustainX = juce::jmax(decayX, sustain);
-    float releaseX = juce::jmax(sustainX, release);
+    auto total = attack + decay + sustain + release;
 
-    juce::Point<float> attackPoint(attack * width, 0);
-    juce::Point<float> decayPoint(decayX * width, height * (1.0f - sustain));
-    juce::Point<float> sustainPoint(sustainX * width, decayPoint.getY());
-    juce::Point<float> releasePoint(releaseX * width, height);
+    float attackX = (attack / total) * width;
+    float decayX = attackX + (decay / total) * width;
+    float sustainX = decayX + (sustain / total) * width;
+    float releaseX = sustainX + (release / total) * width;
 
-    g.setColour(juce::Colours::cyan.withAlpha(0.5f));
+    juce::Point<float> attackPoint(attackX, 0);
+    juce::Point<float> decayPoint(decayX, height * (1.0f - sustain));
+    juce::Point<float> sustainPoint(sustainX, decayPoint.getY());
+    juce::Point<float> releasePoint(releaseX, height);
+
+    g.setColour(juce::Colour::fromString("32ECCA").withAlpha(0.5f));
     g.drawLine(0, height, attackPoint.getX(), attackPoint.getY(), 4.0f);
     g.drawLine(attackPoint.getX(), attackPoint.getY(), decayPoint.getX(), decayPoint.getY(), 4.0f);
     g.drawLine(decayPoint.getX(), decayPoint.getY(), sustainPoint.getX(), sustainPoint.getY(), 4.0f); // Рисуем линию Sustain
     g.drawLine(sustainPoint.getX(), sustainPoint.getY(), releasePoint.getX(), releasePoint.getY(), 4.0f); // Рисуем линию Release
 
-    g.setColour(juce::Colours::red.withAlpha(0.9f));
-    float radius = 10.0f;
+    g.setColour(juce::Colour::fromString("FF9595").withAlpha(0.9f));
+    float radius = 8.0f;
     g.fillEllipse(attackPoint.getX() - radius, attackPoint.getY() - radius, 2 * radius, 2 * radius);
     g.fillEllipse(decayPoint.getX() - radius, decayPoint.getY() - radius, 2 * radius, 2 * radius);
     g.fillEllipse(sustainPoint.getX() - radius, sustainPoint.getY() - radius, 2 * radius, 2 * radius); // Рисуем круг на Sustain

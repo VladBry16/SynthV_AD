@@ -18,6 +18,7 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     decaySlider.setLookAndFeel(customLookAndFeel.get());
     sustainSlider.setLookAndFeel(customLookAndFeel.get());
     releaseSlider.setLookAndFeel(customLookAndFeel.get());
+    volumeSlider.setLookAndFeel(customLookAndFeel.get());
 
     // Установите диапазон, интервал и начальное значение для каждого слайдера
     attackSlider.setRange(0.0, 1.0);
@@ -92,6 +93,8 @@ void SynthV_ADAudioProcessorEditor::paint(juce::Graphics& g)
 {
     juce::Image background = juce::ImageCache::getFromMemory(BinaryData::Gradient_png, BinaryData::Gradient_pngSize);
     g.drawImageAt(background, 0, 0);
+    juce::Image group = juce::ImageCache::getFromMemory(BinaryData::Group_png, BinaryData::Group_pngSize);
+    g.drawImageAt(group, 0, 0);
     juce::Image neon = juce::ImageCache::getFromMemory(BinaryData::Piano_png, BinaryData::Piano_pngSize);
     int imageY = getHeight() - neon.getHeight(); // Расчет координаты Y для размещения изображения внизу
     g.drawImageAt(neon, 0, imageY);
@@ -103,6 +106,8 @@ void SynthV_ADAudioProcessorEditor::paint(juce::Graphics& g)
     g.drawImageAt(point_3, 738, 246);
     juce::Image point_4 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
     g.drawImageAt(point_4, 841, 246);
+    juce::Image point_5 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
+    g.drawImageAt(point_5, 15, 400);
 }
 
 void SynthV_ADAudioProcessorEditor::resized()
@@ -135,9 +140,13 @@ void SynthV_ADAudioProcessorEditor::resized()
     squareWaveButton.setBounds(350, 200, 100, 30);
     triangleWaveButton.setBounds(350, 300, 100, 30);
 
-    volumeSlider.setBounds(300, 100, 72, 72);
+    volumeSlider.setSliderStyle(juce::Slider::Rotary);
+    volumeSlider.setBounds(15, 400, sliderSize, sliderSize);
 
-    keyboardComponent.setBounds(getLocalBounds().removeFromBottom(80).reduced(100, 0));;
+    auto bounds = getLocalBounds().removeFromBottom(84).reduced(100, 0);
+    bounds.setX(150);
+
+    keyboardComponent.setBounds(bounds);
 
     // Установите положение и размер ADSRDisplay
     adsrDisplay.setBounds(564, 46, 330, 194);
