@@ -95,32 +95,40 @@ void SynthV_ADAudioProcessorEditor::paint(juce::Graphics& g)
     juce::Image neon = juce::ImageCache::getFromMemory(BinaryData::Piano_png, BinaryData::Piano_pngSize);
     int imageY = getHeight() - neon.getHeight(); // Расчет координаты Y для размещения изображения внизу
     g.drawImageAt(neon, 0, imageY);
+    juce::Image point_1 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
+    g.drawImageAt(point_1, 532, 246);
+    juce::Image point_2 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
+    g.drawImageAt(point_2, 635, 246);
+    juce::Image point_3 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
+    g.drawImageAt(point_3, 738, 246);
+    juce::Image point_4 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
+    g.drawImageAt(point_4, 841, 246);
 }
 
 void SynthV_ADAudioProcessorEditor::resized()
 {
     // Здесь вы можете установить положение и размер слайдеров
     // Например:
-    int sliderSize = 72; // Увеличиваем размер слайдера
+    int sliderSize = 80; // Увеличиваем размер слайдера
     int padding = 10; // Отступ между слайдерами
     int labelHeight = 20; // Высота метки
 
     // Устанавливаем положение и размер меток и слайдеров
-    attackLabel.setBounds(padding, padding, sliderSize, labelHeight);
+    attackLabel.setBounds(532, 326, sliderSize, labelHeight);
     attackSlider.setSliderStyle(juce::Slider::Rotary); // Устанавливаем стиль слайдера как Rotary
-    attackSlider.setBounds(padding, padding + labelHeight, sliderSize, sliderSize);
+    attackSlider.setBounds(532, 246, sliderSize, sliderSize);
 
-    decayLabel.setBounds(padding + sliderSize + padding, padding, sliderSize, labelHeight);
+    decayLabel.setBounds(635, 326, sliderSize, labelHeight);
     decaySlider.setSliderStyle(juce::Slider::Rotary); // Устанавливаем стиль слайдера как Rotary
-    decaySlider.setBounds(padding + sliderSize + padding, padding + labelHeight, sliderSize, sliderSize);
+    decaySlider.setBounds(635, 246, sliderSize, sliderSize);
 
-    sustainLabel.setBounds(padding, padding + sliderSize + padding + labelHeight, sliderSize, labelHeight);
+    sustainLabel.setBounds(738, 326, sliderSize, labelHeight);
     sustainSlider.setSliderStyle(juce::Slider::Rotary); // Устанавливаем стиль слайдера как Rotary
-    sustainSlider.setBounds(padding, padding + sliderSize + padding + 2 * labelHeight, sliderSize, sliderSize);
+    sustainSlider.setBounds(738, 246, sliderSize, sliderSize);
 
-    releaseLabel.setBounds(padding + sliderSize + padding, padding + sliderSize + padding + labelHeight, sliderSize, labelHeight);
+    releaseLabel.setBounds(841, 326, sliderSize, labelHeight);
     releaseSlider.setSliderStyle(juce::Slider::Rotary); // Устанавливаем стиль слайдера как Rotary
-    releaseSlider.setBounds(padding + sliderSize + padding, padding + sliderSize + padding + 2 * labelHeight, sliderSize, sliderSize);
+    releaseSlider.setBounds(841, 246, sliderSize, sliderSize);
 
     sineWaveButton.setBounds(350, 10, 100, 30);
     sawWaveButton.setBounds(350, 100, 100, 30);

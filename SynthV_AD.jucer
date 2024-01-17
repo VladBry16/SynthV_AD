@@ -5,22 +5,23 @@
               pluginFormats="buildStandalone,buildVST3" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="mL4z1X" name="SynthV_AD">
     <GROUP id="{1CAFA5F2-F060-8927-8CED-1526F1FDEFD5}" name="Source">
+      <FILE id="JjV0SP" name="Gradient.png" compile="0" resource="1" file="Source/pics/Gradient.png"/>
       <FILE id="n4uT8X" name="ADSRDisplay.h" compile="0" resource="0" file="Source/ADSRDisplay.h"/>
+      <FILE id="isYCCO" name="Points.png" compile="0" resource="1" file="Source/pics/Points.png"/>
       <FILE id="IJogMX" name="ADSRDisplay.cpp" compile="1" resource="0" file="Source/ADSRDisplay.cpp"/>
+      <FILE id="SOKMLZ" name="Piano.png" compile="0" resource="1" file="Source/pics/Piano.png"/>
+      <FILE id="W6Tncb" name="Krutilka.png" compile="0" resource="1" file="Source/pics/Krutilka.png"/>
       <FILE id="YCFuz8" name="SynthOSC.cpp" compile="1" resource="0" file="Source/SynthOSC.cpp"/>
       <FILE id="b5l7dO" name="SynthOSC.h" compile="0" resource="0" file="Source/SynthOSC.h"/>
       <FILE id="lQKPtl" name="Synth.h" compile="0" resource="0" file="Source/Synth.h"/>
       <FILE id="Z2uIef" name="Synth.cpp" compile="1" resource="0" file="Source/Synth.cpp"/>
       <FILE id="g39k1p" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
-      <FILE id="y6GgeN" name="Piano.png" compile="0" resource="1" file="../../Downloads/Piano.png"/>
-      <FILE id="YJgZma" name="Krutilka.png" compile="0" resource="1" file="../../Downloads/Krutilka.png"/>
       <FILE id="SuKLVj" name="PluginProcessor.h" compile="0" resource="0"
             file="Source/PluginProcessor.h"/>
       <FILE id="X9EwjR" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="JKwLlx" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
-      <FILE id="eeP1Gv" name="Gradient.png" compile="0" resource="1" file="../../Downloads/Gradient.png"/>
       <FILE id="pOYI2s" name="CustomLookAndFeel.cpp" compile="1" resource="0"
             file="Source/CustomLookAndFeel.cpp"/>
       <FILE id="xIpqxL" name="CustomLookAndFeel.h" compile="0" resource="0"

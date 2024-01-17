@@ -3373,9 +3373,10 @@
     <ClInclude Include="..\..\JuceLibraryCode\JucePluginDefines.h"/>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\Downloads\Piano.png"/>
-    <None Include="..\..\..\..\Downloads\Krutilka.png"/>
-    <None Include="..\..\..\..\Downloads\Gradient.png"/>
+    <None Include="..\..\Source\pics\Gradient.png"/>
+    <None Include="..\..\Source\pics\Points.png"/>
+    <None Include="..\..\Source\pics\Piano.png"/>
+    <None Include="..\..\Source\pics\Krutilka.png"/>
     <None Include="..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt"/>
     <None Include="..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\README.md"/>
     <None Include="..\..\..\..\..\..\JUCE\modules\juce_audio_formats\codecs\flac\Flac Licence.txt"/>

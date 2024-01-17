@@ -5927,13 +5927,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\Downloads\Piano.png">
+    <None Include="..\..\Source\pics\Gradient.png">
       <Filter>SynthV_AD\Source</Filter>
     </None>
-    <None Include="..\..\..\..\Downloads\Krutilka.png">
+    <None Include="..\..\Source\pics\Points.png">
       <Filter>SynthV_AD\Source</Filter>
     </None>
-    <None Include="..\..\..\..\Downloads\Gradient.png">
+    <None Include="..\..\Source\pics\Piano.png">
+      <Filter>SynthV_AD\Source</Filter>
+    </None>
+    <None Include="..\..\Source\pics\Krutilka.png">
       <Filter>SynthV_AD\Source</Filter>
     </None>
     <None Include="..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt">
