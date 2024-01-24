@@ -20,7 +20,7 @@ void SynthOSC::noteOn()
     adsr.noteOn();
 }
 
-void SynthOSC::noteOff()  // И эта функция должна быть реализована здесь
+void SynthOSC::noteOff()
 {
     adsr.noteOff();
 }

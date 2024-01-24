@@ -5,13 +5,30 @@
               pluginFormats="buildStandalone,buildVST3" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="mL4z1X" name="SynthV_AD">
     <GROUP id="{1CAFA5F2-F060-8927-8CED-1526F1FDEFD5}" name="Source">
-      <FILE id="JjV0SP" name="Gradient.png" compile="0" resource="1" file="Source/pics/Gradient.png"/>
+      <GROUP id="{27C552D1-0E39-440E-727D-0088FE8CB5FE}" name="pics">
+        <FILE id="N6rRoC" name="triangle_select.png" compile="0" resource="1"
+              file="Source/pics/triangle_select.png"/>
+        <FILE id="tKad7n" name="square_select.png" compile="0" resource="1"
+              file="Source/pics/square_select.png"/>
+        <FILE id="pRlubj" name="sin_select.png" compile="0" resource="1" file="Source/pics/sin_select.png"/>
+        <FILE id="YsNmQa" name="saw_select.png" compile="0" resource="1" file="Source/pics/saw_select.png"/>
+        <FILE id="JjV0SP" name="Gradient.png" compile="0" resource="1" file="Source/pics/Gradient.png"/>
+        <FILE id="mqdvdX" name="square_off.png" compile="0" resource="1" file="Source/pics/square_off.png"/>
+        <FILE id="o9djmx" name="triangle_off.png" compile="0" resource="1"
+              file="Source/pics/triangle_off.png"/>
+        <FILE id="njtV1g" name="sin_on.png" compile="0" resource="1" file="Source/pics/sin_on.png"/>
+        <FILE id="qHvRHP" name="swa_on.png" compile="0" resource="1" file="Source/pics/swa_on.png"/>
+        <FILE id="EpqfL0" name="saw_off.png" compile="0" resource="1" file="Source/pics/saw_off.png"/>
+        <FILE id="isYCCO" name="Points.png" compile="0" resource="1" file="Source/pics/Points.png"/>
+        <FILE id="Nr0BMp" name="triangle_on.png" compile="0" resource="1" file="Source/pics/triangle_on.png"/>
+        <FILE id="c9dkAq" name="square_on.png" compile="0" resource="1" file="Source/pics/square_on.png"/>
+        <FILE id="W6Tncb" name="Krutilka.png" compile="0" resource="1" file="Source/pics/Krutilka.png"/>
+        <FILE id="NNLmT7" name="Group.png" compile="0" resource="1" file="Source/pics/Group.png"/>
+        <FILE id="SOKMLZ" name="Piano.png" compile="0" resource="1" file="Source/pics/Piano.png"/>
+        <FILE id="jDHdEr" name="sin_off.png" compile="0" resource="1" file="Source/pics/sin_off.png"/>
+      </GROUP>
       <FILE id="n4uT8X" name="ADSRDisplay.h" compile="0" resource="0" file="Source/ADSRDisplay.h"/>
-      <FILE id="isYCCO" name="Points.png" compile="0" resource="1" file="Source/pics/Points.png"/>
       <FILE id="IJogMX" name="ADSRDisplay.cpp" compile="1" resource="0" file="Source/ADSRDisplay.cpp"/>
-      <FILE id="SOKMLZ" name="Piano.png" compile="0" resource="1" file="Source/pics/Piano.png"/>
-      <FILE id="NNLmT7" name="Group.png" compile="0" resource="1" file="Source/pics/Group.png"/>
-      <FILE id="W6Tncb" name="Krutilka.png" compile="0" resource="1" file="Source/pics/Krutilka.png"/>
       <FILE id="YCFuz8" name="SynthOSC.cpp" compile="1" resource="0" file="Source/SynthOSC.cpp"/>
       <FILE id="b5l7dO" name="SynthOSC.h" compile="0" resource="0" file="Source/SynthOSC.h"/>
       <FILE id="lQKPtl" name="Synth.h" compile="0" resource="0" file="Source/Synth.h"/>
@@ -52,18 +69,18 @@
         <CONFIGURATION isDebug="0" name="Release" targetName="SynthV_AD"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
-        <MODULEPATH id="juce_audio_basics" path="..\..\..\..\JUCE\modules"/>
-        <MODULEPATH id="juce_audio_devices" path="..\..\..\..\JUCE\modules"/>
-        <MODULEPATH id="juce_audio_formats" path="..\..\..\..\JUCE\modules"/>
-        <MODULEPATH id="juce_audio_plugin_client" path="..\..\..\..\JUCE\modules"/>
-        <MODULEPATH id="juce_audio_processors" path="..\..\..\..\JUCE\modules"/>
-        <MODULEPATH id="juce_audio_utils" path="..\..\..\..\JUCE\modules"/>
-        <MODULEPATH id="juce_core" path="..\..\..\..\JUCE\modules"/>
-        <MODULEPATH id="juce_data_structures" path="..\..\..\..\JUCE\modules"/>
-        <MODULEPATH id="juce_events" path="..\..\..\..\JUCE\modules"/>
-        <MODULEPATH id="juce_graphics" path="..\..\..\..\JUCE\modules"/>
-        <MODULEPATH id="juce_gui_basics" path="..\..\..\..\JUCE\modules"/>
-        <MODULEPATH id="juce_gui_extra" path="..\..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_basics" path="..\..\..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_devices" path="..\..\..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_formats" path="..\..\..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="..\..\..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_processors" path="..\..\..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_utils" path="..\..\..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_core" path="..\..\..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_data_structures" path="..\..\..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_events" path="..\..\..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_graphics" path="..\..\..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_gui_basics" path="..\..\..\..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_gui_extra" path="..\..\..\..\..\JUCE\modules"/>
       </MODULEPATHS>
     </VS2022>
   </EXPORTFORMATS>

@@ -70,13 +70,11 @@ void Synth::initializeOscillators()
 
 	const auto waveTableData = generateSineWaveTable();
 
-	// Ïðåîáðàçîâàíèå std::vector<float> â juce::AudioSampleBuffer
 	juce::AudioSampleBuffer waveTable(1, waveTableData.size());
 	std::copy(waveTableData.begin(), waveTableData.end(), waveTable.getWritePointer(0));
 
 	oscillators.clear();
 	for (auto i = 0; i < OSCILLATORS_COUNT; ++i) {
-		// Ñîçäàåì íîâûé ýêçåìïëÿð SynthOSC è äîáàâëÿåì åãî â âåêòîð
 		oscillators.push_back(SynthOSC(waveTable, sampleRate));
 	}
 }
@@ -170,19 +168,18 @@ void Synth::handleMidiEvent(const juce::MidiMessage& midiEvent)
 		const auto controllerNumber = midiEvent.getControllerNumber();
 		const auto controllerValue = midiEvent.getControllerValue();
 
-		// Îáðàáîòêà ñîîáùåíèÿ î êîíòðîëå èçìåíåíèÿ
 		switch (controllerNumber)
 		{
-		case 1: // CC1 - Modulation Wheel
+		case 1:
 			setAttack(controllerValue / 127.0f);
 			break;
-		case 2: // CC2 - Breath controller
+		case 2:
 			setDecay(controllerValue / 127.0f);
 			break;
-		case 7: // CC7 - Channel Volume
+		case 7: 
 			setSustain(controllerValue / 127.0f);
 			break;
-		case 11: // CC11 - Expression Controller
+		case 11:
 			setRelease(controllerValue / 127.0f);
 			break;
 		default:
@@ -236,7 +233,6 @@ float Synth::getAttack() const
 	if (oscillators.empty())
 		return 0.0f;
 
-	// Âåðíóòü çíà÷åíèå àòàêè äëÿ ïåðâîãî îñöèëëÿòîðà
 	return oscillators[0].getADSR().getParameters().attack;
 }
 
@@ -245,7 +241,6 @@ float Synth::getDecay() const
 	if (oscillators.empty())
 		return 0.0f;
 
-	// Âåðíóòü çíà÷åíèå àòàêè äëÿ ïåðâîãî îñöèëëÿòîðà
 	return oscillators[0].getADSR().getParameters().decay;
 }
 
@@ -254,7 +249,6 @@ float Synth::getSustain() const
 	if (oscillators.empty())
 		return 0.0f;
 
-	// Âåðíóòü çíà÷åíèå àòàêè äëÿ ïåðâîãî îñöèëëÿòîðà
 	return oscillators[0].getADSR().getParameters().sustain;
 }
 
@@ -263,7 +257,6 @@ float Synth::getRelease() const
 	if (oscillators.empty())
 		return 0.0f;
 
-	// Âåðíóòü çíà÷åíèå àòàêè äëÿ ïåðâîãî îñöèëëÿòîðà
 	return oscillators[0].getADSR().getParameters().release;
 }
 
@@ -287,7 +280,6 @@ void Synth::setWaveTable(Waveform waveform)
 		break;
 	}
 
-	// Ïðåîáðàçîâàíèå std::vector<float> â juce::AudioSampleBuffer
 	juce::AudioSampleBuffer waveTable(1, waveTableData.size());
 	std::copy(waveTableData.begin(), waveTableData.end(), waveTable.getWritePointer(0));
 

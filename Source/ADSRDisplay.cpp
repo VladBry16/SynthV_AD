@@ -33,7 +33,7 @@ void ADSRDisplay::paint(juce::Graphics& g)
     g.drawLine(decayPoint.getX(), decayPoint.getY(), sustainPoint.getX(), sustainPoint.getY(), 4.0f); // Рисуем линию Sustain
     g.drawLine(sustainPoint.getX(), sustainPoint.getY(), releasePoint.getX(), releasePoint.getY(), 4.0f); // Рисуем линию Release
 
-    g.setColour(juce::Colour::fromString("FF9595").withAlpha(0.9f));
+    g.setColour(juce::Colour::fromString("FFFFFF").withAlpha(0.9f));
     float radius = 8.0f;
     g.fillEllipse(attackPoint.getX() - radius, attackPoint.getY() - radius, 2 * radius, 2 * radius);
     g.fillEllipse(decayPoint.getX() - radius, decayPoint.getY() - radius, 2 * radius, 2 * radius);
