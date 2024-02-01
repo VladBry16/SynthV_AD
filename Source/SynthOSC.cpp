@@ -27,15 +27,13 @@ void SynthOSC::noteOff()
 
 float SynthOSC::getNextSample()
 {
+    auto modulatedFrequency = generateModulatedSignal(frequency, time);
     auto currentSample = waveTable.getSample(0, static_cast<int>(index));
-    index += indexIncrement;
+    index += indexIncrement * modulatedFrequency / frequency;
     if (index >= waveTable.getNumSamples())
         index -= waveTable.getNumSamples();
 
     currentSample *= adsr.getNextSample();
-
-    // Добавляем модуляцию
-    currentSample *= generateModulatedSignal(frequency, time);
     time += 1.0 / sampleRate;  // Увеличиваем время
 
     return currentSample;
@@ -90,12 +88,12 @@ float SynthOSC::generateModulatedSignal(float carrierFrequency, float time)
 {
     if (modDepth == 0.0f)
     {
-        return 1.0f;
+        return carrierFrequency;
     }
     else
     {
         const auto PI = std::atanf(1.f) * 4;
-        return std::sinf(2 * PI * (carrierFrequency + (std::sinf(2 * PI * modFrequency * time) * modDepth)) * time);
+        return carrierFrequency + modDepth * 100 * std::sinf(2 * PI * modFrequency * time);
     }
 }
 
