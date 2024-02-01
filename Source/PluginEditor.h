@@ -61,6 +61,9 @@ private:
     juce::Slider releaseSlider;
     ADSRDisplay adsrDisplay;
 
+    juce::Slider depthSlider;
+    juce::Slider frequencySlider;
+
     juce::Slider volumeSlider;
     
     juce::Label attackLabel{ "A - Attack", "A - Attack" };

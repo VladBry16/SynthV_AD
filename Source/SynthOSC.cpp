@@ -33,6 +33,11 @@ float SynthOSC::getNextSample()
         index -= waveTable.getNumSamples();
 
     currentSample *= adsr.getNextSample();
+
+    // Добавляем модуляцию
+    currentSample *= generateModulatedSignal(frequency, time);
+    time += 1.0 / sampleRate;  // Увеличиваем время
+
     return currentSample;
 }
 
@@ -78,3 +83,26 @@ void SynthOSC::setWaveTable(juce::AudioSampleBuffer waveTable)
 {
     this->waveTable = std::move(waveTable);
 }
+
+float SynthOSC::getFrequency() const { return frequency; }
+
+float SynthOSC::generateModulatedSignal(float carrierFrequency, float time)
+{
+    if (modDepth == 0.0f)
+    {
+        return 1.0f;
+    }
+    else
+    {
+        const auto PI = std::atanf(1.f) * 4;
+        return std::sinf(2 * PI * (carrierFrequency + (std::sinf(2 * PI * modFrequency * time) * modDepth)) * time);
+    }
+}
+
+void SynthOSC::setModulationDepth(float newDepth) { modDepth = newDepth; }
+
+void SynthOSC::setModulationFrequency(float newFrequency) { modFrequency = newFrequency; }
+
+float SynthOSC::getModulationDepth() { return modDepth; }
+
+float SynthOSC::getModulationFrequency() { return modFrequency; }

@@ -28,6 +28,9 @@ public:
 
     void setWaveTable(Waveform waveform);
 
+    void setModulationDepth(float newDepth);
+    void setModulationFrequency(float newFrequency);
+
     void setVolume(float newVolume);
     float getVolume() const;
 

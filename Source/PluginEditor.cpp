@@ -20,6 +20,18 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     releaseSlider.setLookAndFeel(customLookAndFeel.get());
     volumeSlider.setLookAndFeel(customLookAndFeel.get());
 
+    depthSlider.setLookAndFeel(customLookAndFeel.get());
+    frequencySlider.setLookAndFeel(customLookAndFeel.get());
+    addAndMakeVisible(depthSlider);
+    addAndMakeVisible(frequencySlider);
+    depthSlider.setRange(0.0, 1.0);
+    frequencySlider.setRange(0.1, 10.0);
+    depthSlider.addListener(this);
+    frequencySlider.addListener(this);
+    depthSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+    frequencySlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+
+
     // Установите диапазон, интервал и начальное значение для каждого слайдера
     attackSlider.setRange(0.0, 1.0);
     attackSlider.setValue(audioProcessor.getSynth().getAttack());
@@ -145,6 +157,9 @@ void SynthV_ADAudioProcessorEditor::resized()
     decaySlider.setSliderStyle(juce::Slider::Rotary); // Устанавливаем стиль слайдера как Rotary
     decaySlider.setBounds(635, 246, sliderSize, sliderSize);
 
+    depthSlider.setBounds(100, 200, sliderSize, sliderSize);
+    frequencySlider.setBounds(100, 300, sliderSize, sliderSize);
+
     sustainLabel.setBounds(738, 326, sliderSize, labelHeight);
     sustainSlider.setSliderStyle(juce::Slider::Rotary); // Устанавливаем стиль слайдера как Rotary
     sustainSlider.setBounds(738, 246, sliderSize, sliderSize);
@@ -177,25 +192,34 @@ void SynthV_ADAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
     if (slider == &attackSlider)
     {
         audioProcessor.getSynth().setAttack(attackSlider.getValue());
+        adsrDisplay.repaint();
     }
     if (slider == &decaySlider)
     {
         audioProcessor.getSynth().setDecay(decaySlider.getValue());
+        adsrDisplay.repaint();
     }
     if (slider == &sustainSlider)
     {
         audioProcessor.getSynth().setSustain(sustainSlider.getValue());
+        adsrDisplay.repaint();
     }
     if (slider == &releaseSlider)
     {
         audioProcessor.getSynth().setRelease(releaseSlider.getValue());
+        adsrDisplay.repaint();
     }
     if (slider == &volumeSlider)
     {
         audioProcessor.getSynth().setVolume(volumeSlider.getValue());
     }
-    // Перерисуйте ADSRDisplay
-    adsrDisplay.repaint();
+    if (slider == &depthSlider) {
+        audioProcessor.getSynth().setModulationDepth(depthSlider.getValue());
+    }
+    if (slider == &frequencySlider) {
+        audioProcessor.getSynth().setModulationFrequency(frequencySlider.getValue());
+
+    }
 }
 
 void SynthV_ADAudioProcessorEditor::buttonClicked(juce::Button* button)

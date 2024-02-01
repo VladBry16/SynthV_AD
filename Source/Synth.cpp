@@ -100,7 +100,6 @@ void Synth::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& mid
 		handleMidiEvent(midiEvent);
 
 		currentSample = midiEventSample;
-
 	}
 
 	render(buffer, currentSample, buffer.getNumSamples());
@@ -296,3 +295,16 @@ float Synth::getVolume() const {
 	return volume;
 }
 
+void Synth::setModulationDepth(float newDepth) { 
+	for (auto& oscillator : oscillators)
+	{
+		oscillator.setModulationDepth(newDepth);
+	}
+}
+
+void Synth::setModulationFrequency(float newFrequency) { 
+	for (auto& oscillator : oscillators)
+	{
+		oscillator.setModulationFrequency(newFrequency);
+	}
+}
