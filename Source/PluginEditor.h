@@ -30,8 +30,6 @@ public:
     void selectWave();
 
 private:
-    
-    int x = 1;
 
     std::unique_ptr<CustomLookAndFeel> customLookAndFeel;
 

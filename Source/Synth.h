@@ -34,6 +34,8 @@ public:
     void setVolume(float newVolume);
     float getVolume() const;
 
+    void setX(int x);
+    int getX() const;
 
     juce::MidiKeyboardState& getKeyboardState() { return keyboardState; }
 
@@ -53,4 +55,9 @@ private:
     std::vector<float> generateTriangleWaveTable();
     juce::MidiKeyboardState keyboardState;
     float volume = 1.0f;
+
+    int X = 1;
+
+    juce::dsp::IIR::Filter<float> lowPassFilter;
+    juce::dsp::IIR::Filter<float> highPassFilter;
 };

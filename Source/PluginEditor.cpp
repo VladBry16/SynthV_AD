@@ -78,22 +78,7 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     addAndMakeVisible(squareWaveButton);
     addAndMakeVisible(triangleWaveButton);
 
-    sineWaveButton.setImages(false, true, true,
-        sin_select, 1.0f, juce::Colours::transparentBlack,
-        sin_select, 1.0f, juce::Colours::transparentBlack,
-        sin_select, 1.0f, juce::Colours::transparentBlack);
-    sawWaveButton.setImages(false, true, true,
-        saw_off, 1.0f, juce::Colours::transparentBlack,
-        saw_on, 1.0f, juce::Colours::transparentBlack,
-        saw_off, 1.0f, juce::Colours::transparentBlack);
-    squareWaveButton.setImages(false, true, true,
-        square_off, 1.0f, juce::Colours::transparentBlack,
-        square_on, 1.0f, juce::Colours::transparentBlack,
-        square_off, 1.0f, juce::Colours::transparentBlack);
-    triangleWaveButton.setImages(false, true, true,
-        triangle_off, 1.0f, juce::Colours::transparentBlack,
-        triangle_on, 1.0f, juce::Colours::transparentBlack,
-        triangle_off, 1.0f, juce::Colours::transparentBlack);
+    selectWave();
 
     // Установите идентификатор группы для каждой кнопки
     sineWaveButton.setRadioGroupId(1);
@@ -224,39 +209,23 @@ void SynthV_ADAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
 
 void SynthV_ADAudioProcessorEditor::buttonClicked(juce::Button* button)
 {
-    selectWave();
     if (button == &sineWaveButton)
     {
-        audioProcessor.getSynth().setWaveTable(Waveform::Sine);
-        sineWaveButton.setImages(true, true, true,
-            sin_select, 1.0f, juce::Colours::transparentBlack,
-            sin_select, 1.0f, juce::Colours::transparentBlack,
-            sin_select, 1.0f, juce::Colours::transparentBlack);
+        audioProcessor.getSynth().setX(1);
     }
     else if (button == &sawWaveButton)
     {
-        audioProcessor.getSynth().setWaveTable(Waveform::Saw);
-        sawWaveButton.setImages(false, true, true,
-            saw_select, 1.0f, juce::Colours::transparentBlack,
-            saw_select, 1.0f, juce::Colours::transparentBlack,
-            saw_select, 1.0f, juce::Colours::transparentBlack);
+        audioProcessor.getSynth().setX(2);
     }
     else if (button == &squareWaveButton)
     {
-        audioProcessor.getSynth().setWaveTable(Waveform::Square);
-        squareWaveButton.setImages(false, true, true,
-            square_select, 1.0f, juce::Colours::transparentBlack,
-            square_select, 1.0f, juce::Colours::transparentBlack,
-            square_select, 1.0f, juce::Colours::transparentBlack);
+        audioProcessor.getSynth().setX(3);
     }
     else if (button == &triangleWaveButton)
     {
-        audioProcessor.getSynth().setWaveTable(Waveform::Triangle);
-        triangleWaveButton.setImages(false, true, true,
-            triangle_select, 1.0f, juce::Colours::transparentBlack,
-            triangle_select, 1.0f, juce::Colours::transparentBlack,
-            triangle_select, 1.0f, juce::Colours::transparentBlack);
+        audioProcessor.getSynth().setX(4);
     }
+    selectWave();
 }
 
 void SynthV_ADAudioProcessorEditor::selectWave()
@@ -277,4 +246,34 @@ void SynthV_ADAudioProcessorEditor::selectWave()
         triangle_off, 1.0f, juce::Colours::transparentBlack,
         triangle_on, 1.0f, juce::Colours::transparentBlack,
         triangle_off, 1.0f, juce::Colours::transparentBlack);
+    if (audioProcessor.getSynth().getX() == 1) {
+        audioProcessor.getSynth().setWaveTable(Waveform::Sine);
+        sineWaveButton.setImages(true, true, true,
+            sin_select, 1.0f, juce::Colours::transparentBlack,
+            sin_select, 1.0f, juce::Colours::transparentBlack,
+            sin_select, 1.0f, juce::Colours::transparentBlack);
+    }
+    else if (audioProcessor.getSynth().getX() == 2)
+    {
+        audioProcessor.getSynth().setWaveTable(Waveform::Saw);
+        sawWaveButton.setImages(false, true, true,
+            saw_select, 1.0f, juce::Colours::transparentBlack,
+            saw_select, 1.0f, juce::Colours::transparentBlack,
+            saw_select, 1.0f, juce::Colours::transparentBlack);
+    }
+    else if (audioProcessor.getSynth().getX() == 3) {
+        audioProcessor.getSynth().setWaveTable(Waveform::Square);
+        squareWaveButton.setImages(false, true, true,
+            square_select, 1.0f, juce::Colours::transparentBlack,
+            square_select, 1.0f, juce::Colours::transparentBlack,
+            square_select, 1.0f, juce::Colours::transparentBlack);
+    }
+    else if (audioProcessor.getSynth().getX() == 4)
+    {
+        audioProcessor.getSynth().setWaveTable(Waveform::Triangle);
+        triangleWaveButton.setImages(false, true, true,
+            triangle_select, 1.0f, juce::Colours::transparentBlack,
+            triangle_select, 1.0f, juce::Colours::transparentBlack,
+            triangle_select, 1.0f, juce::Colours::transparentBlack);
+    }
 }

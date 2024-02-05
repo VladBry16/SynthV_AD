@@ -308,3 +308,12 @@ void Synth::setModulationFrequency(float newFrequency) {
 		oscillator.setModulationFrequency(newFrequency);
 	}
 }
+
+void Synth::setX(int x) {
+	X = x;
+}
+
+int Synth::getX() const
+{
+	return X;
+}
