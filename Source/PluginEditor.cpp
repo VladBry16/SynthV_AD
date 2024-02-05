@@ -31,6 +31,16 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     depthSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
     frequencySlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
 
+    highPassFreqSlider.setSliderStyle(juce::Slider::Rotary);
+    highPassFreqSlider.addListener(this);
+    addAndMakeVisible(&highPassFreqSlider);
+
+    lowPassFreqSlider.setSliderStyle(juce::Slider::Rotary);
+    lowPassFreqSlider.addListener(this);
+    addAndMakeVisible(&lowPassFreqSlider);
+
+    highPassFreqSlider.setRange(20.0, 20000.0);
+    lowPassFreqSlider.setRange(20.0, 20000.0);
 
     // Установите диапазон, интервал и начальное значение для каждого слайдера
     attackSlider.setRange(0.0, 1.0);
@@ -145,6 +155,9 @@ void SynthV_ADAudioProcessorEditor::resized()
     depthSlider.setBounds(100, 200, sliderSize, sliderSize);
     frequencySlider.setBounds(100, 300, sliderSize, sliderSize);
 
+    highPassFreqSlider.setBounds(200, 200, sliderSize, sliderSize);
+    lowPassFreqSlider.setBounds(200, 300, sliderSize, sliderSize);
+
     sustainLabel.setBounds(738, 326, sliderSize, labelHeight);
     sustainSlider.setSliderStyle(juce::Slider::Rotary); // Устанавливаем стиль слайдера как Rotary
     sustainSlider.setBounds(738, 246, sliderSize, sliderSize);
@@ -203,7 +216,14 @@ void SynthV_ADAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
     }
     if (slider == &frequencySlider) {
         audioProcessor.getSynth().setModulationFrequency(frequencySlider.getValue());
-
+    }
+    if (slider == &highPassFreqSlider)
+    {
+        audioProcessor.getSynth().setHighPassFreq(highPassFreqSlider.getValue());
+    }
+    if (slider == &lowPassFreqSlider)
+    {
+        audioProcessor.getSynth().setLowPassFreq(lowPassFreqSlider.getValue());
     }
 }
 

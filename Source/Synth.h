@@ -26,6 +26,9 @@ public:
     float getSustain() const;
     float getRelease() const;
 
+    void setHighPassFreq(float freq);
+    void setLowPassFreq(float freq);
+
     void setWaveTable(Waveform waveform);
 
     void setModulationDepth(float newDepth);

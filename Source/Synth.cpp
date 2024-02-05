@@ -103,6 +103,17 @@ void Synth::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& mid
 	}
 
 	render(buffer, currentSample, buffer.getNumSamples());
+
+	// Применение фильтров
+	for (int channel = 0; channel < buffer.getNumChannels(); ++channel)
+	{
+		auto* channelData = buffer.getWritePointer(channel);
+		juce::dsp::AudioBlock<float> block(buffer);
+		block = block.getSingleChannelBlock(channel);
+		juce::dsp::ProcessContextReplacing<float> context(block);
+		highPassFilter.process(context);
+		lowPassFilter.process(context);
+	}
 }
 
 void Synth::render(juce::AudioBuffer<float>& buffer,
@@ -316,4 +327,16 @@ void Synth::setX(int x) {
 int Synth::getX() const
 {
 	return X;
+}
+
+void Synth::setHighPassFreq(float freq)
+{
+	auto coeffs = juce::dsp::IIR::Coefficients<float>::makeHighPass(sampleRate, freq, 1);
+	highPassFilter.coefficients = *coeffs;
+}
+
+void Synth::setLowPassFreq(float freq)
+{
+	auto coeffs = juce::dsp::IIR::Coefficients<float>::makeLowPass(sampleRate, freq, 1);
+	lowPassFilter.coefficients = *coeffs;
 }

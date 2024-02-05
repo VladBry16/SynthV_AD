@@ -59,6 +59,9 @@ private:
     juce::Slider releaseSlider;
     ADSRDisplay adsrDisplay;
 
+    juce::Slider highPassFreqSlider;
+    juce::Slider lowPassFreqSlider;
+
     juce::Slider depthSlider;
     juce::Slider frequencySlider;
 
