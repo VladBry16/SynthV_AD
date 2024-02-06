@@ -61,6 +61,6 @@ private:
 
     int X = 1;
 
-    juce::dsp::IIR::Filter<float> lowPassFilter;
-    juce::dsp::IIR::Filter<float> highPassFilter;
+    std::vector<juce::dsp::IIR::Filter<float>> highPassFilters;
+    std::vector<juce::dsp::IIR::Filter<float>> lowPassFilters;
 };
