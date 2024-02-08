@@ -8,7 +8,7 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     : AudioProcessorEditor (&p), audioProcessor (p), adsrDisplay(p.getSynth()),
     attackLabel("A - Attack", "A - Attack"), decayLabel("D - Decay", "D - Decay"),
     sustainLabel("S - Sustain", "S - Sustain"), releaseLabel("R - Release", "R - Release"), 
-    volumeLabel("Volume", "Volume"), keyboardComponent(p.getSynth().getKeyboardState(), juce::MidiKeyboardComponent::horizontalKeyboard)
+    volumeLabel("Volume", "Volume"), keyboardComponent(p.getSynth().getKeyboardState(), juce::MidiKeyboardComponent::horizontalKeyboard), filterDisplay(p.getSynth())
 {
     // Создайте экземпляр CustomLookAndFeel
     customLookAndFeel = std::make_unique<CustomLookAndFeel>();
@@ -19,6 +19,8 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     sustainSlider.setLookAndFeel(customLookAndFeel.get());
     releaseSlider.setLookAndFeel(customLookAndFeel.get());
     volumeSlider.setLookAndFeel(customLookAndFeel.get());
+    highPassFreqSlider.setLookAndFeel(customLookAndFeel.get());
+    lowPassFreqSlider.setLookAndFeel(customLookAndFeel.get());
 
     depthSlider.setLookAndFeel(customLookAndFeel.get());
     frequencySlider.setLookAndFeel(customLookAndFeel.get());
@@ -35,12 +37,21 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     highPassFreqSlider.addListener(this);
     addAndMakeVisible(&highPassFreqSlider);
 
+    highPassFreqSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+    lowPassFreqSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+
     lowPassFreqSlider.setSliderStyle(juce::Slider::Rotary);
     lowPassFreqSlider.addListener(this);
     addAndMakeVisible(&lowPassFreqSlider);
 
-    highPassFreqSlider.setRange(20.0, 20000.0);
-    lowPassFreqSlider.setRange(20.0, 20000.0);
+    highPassFreqSlider.setRange(20.0, 20000.0, 0.1);
+    highPassFreqSlider.setSkewFactorFromMidPoint(1000.0); // Средняя точка, где скос должен быть равен 0.5
+
+    lowPassFreqSlider.setRange(20.0, 20000.0, 0.1);
+    lowPassFreqSlider.setSkewFactorFromMidPoint(1000.0); // Средняя точка, где скос должен быть равен 0.5
+
+    highPassFreqSlider.setValue(audioProcessor.getSynth().getHighPassFreq());
+    lowPassFreqSlider.setValue(audioProcessor.getSynth().getLowPassFreq());
 
     // Установите диапазон, интервал и начальное значение для каждого слайдера
     attackSlider.setRange(0.0, 1.0);
@@ -103,8 +114,9 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
 
     addAndMakeVisible(keyboardComponent);
 
-    // Добавьте ADSRDisplay на ваш компонент
+    // Добавление ADSRDisplay и FilterDisplay на компонент
     addAndMakeVisible(adsrDisplay);
+    addAndMakeVisible(filterDisplay);
 
     setSize(1000, 500);
 }
@@ -132,6 +144,12 @@ void SynthV_ADAudioProcessorEditor::paint(juce::Graphics& g)
     g.drawImageAt(point_4, 841, 246);
     juce::Image point_5 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
     g.drawImageAt(point_5, 15, 400);
+    juce::Image point_6 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
+    g.drawImageAt(point_6, 359, 169);
+    juce::Image point_7 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
+    g.drawImageAt(point_7, 359, 275);
+    juce::Image filter_pic = juce::ImageCache::getFromMemory(BinaryData::filter_png, BinaryData::filter_pngSize);
+    g.drawImageAt(filter_pic, 70, 169);
 }
 
 void SynthV_ADAudioProcessorEditor::resized()
@@ -155,8 +173,8 @@ void SynthV_ADAudioProcessorEditor::resized()
     depthSlider.setBounds(100, 200, sliderSize, sliderSize);
     frequencySlider.setBounds(100, 300, sliderSize, sliderSize);
 
-    highPassFreqSlider.setBounds(200, 200, sliderSize, sliderSize);
-    lowPassFreqSlider.setBounds(200, 300, sliderSize, sliderSize);
+    highPassFreqSlider.setBounds(359, 169, sliderSize, sliderSize);
+    lowPassFreqSlider.setBounds(359, 275, sliderSize, sliderSize);
 
     sustainLabel.setBounds(738, 326, sliderSize, labelHeight);
     sustainSlider.setSliderStyle(juce::Slider::Rotary); // Устанавливаем стиль слайдера как Rotary
@@ -183,6 +201,7 @@ void SynthV_ADAudioProcessorEditor::resized()
 
     // Установите положение и размер ADSRDisplay
     adsrDisplay.setBounds(564, 46, 330, 194);
+    filterDisplay.setBounds(70, 169, 268, 183);
 }
 
 void SynthV_ADAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
@@ -220,10 +239,12 @@ void SynthV_ADAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
     if (slider == &highPassFreqSlider)
     {
         audioProcessor.getSynth().setHighPassFreq(highPassFreqSlider.getValue());
+        filterDisplay.repaint();
     }
     if (slider == &lowPassFreqSlider)
     {
         audioProcessor.getSynth().setLowPassFreq(lowPassFreqSlider.getValue());
+        filterDisplay.repaint();
     }
 }
 

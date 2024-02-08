@@ -12,6 +12,7 @@
 #include "PluginProcessor.h"
 #include "ADSRDisplay.h"
 #include "CustomLookAndFeel.h"
+#include "FilterDisplay.h"
 
 //==============================================================================
 /**
@@ -58,6 +59,7 @@ private:
     juce::Slider sustainSlider;
     juce::Slider releaseSlider;
     ADSRDisplay adsrDisplay;
+    FilterDisplay filterDisplay;
 
     juce::Slider highPassFreqSlider;
     juce::Slider lowPassFreqSlider;

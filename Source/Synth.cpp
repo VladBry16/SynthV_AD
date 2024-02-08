@@ -104,17 +104,14 @@ void Synth::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& mid
 
 	render(buffer, currentSample, buffer.getNumSamples());
 
-	// Инициализация фильтров для каждого канала
 	if (highPassFilters.size() != buffer.getNumChannels())
 	{
 		highPassFilters.resize(buffer.getNumChannels());
-		// Инициализация фильтров
 	}
 
 	if (lowPassFilters.size() != buffer.getNumChannels())
 	{
 		lowPassFilters.resize(buffer.getNumChannels());
-		// Инициализация фильтров
 	}
 
 	for (int channel = 0; channel < buffer.getNumChannels(); ++channel)
@@ -343,6 +340,7 @@ int Synth::getX() const
 
 void Synth::setHighPassFreq(float freq)
 {
+	highPassFreq = freq;
 	auto coeffs = juce::dsp::IIR::Coefficients<float>::makeHighPass(sampleRate, freq, 1);
 	for (auto& filter : highPassFilters)
 	{
@@ -352,9 +350,25 @@ void Synth::setHighPassFreq(float freq)
 
 void Synth::setLowPassFreq(float freq)
 {
+	lowPassFreq = freq;
 	auto coeffs = juce::dsp::IIR::Coefficients<float>::makeLowPass(sampleRate, freq, 1);
 	for (auto& filter : lowPassFilters)
 	{
 		filter.coefficients = *coeffs;
 	}
+}
+
+double Synth::getSampleRate() const 
+{ 
+	return sampleRate; 
+}
+
+float Synth::getHighPassFreq() const
+{ 
+	return highPassFreq;
+}
+
+float Synth::getLowPassFreq() const
+{ 
+	return lowPassFreq;
 }

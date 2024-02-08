@@ -8,6 +8,9 @@
 
 namespace BinaryData
 {
+    extern const char*   filter_png;
+    const int            filter_pngSize = 4116;
+
     extern const char*   triangle_select_png;
     const int            triangle_select_pngSize = 18367;
 
@@ -60,7 +63,7 @@ namespace BinaryData
     const int            sin_off_pngSize = 16389;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 17;
+    const int namedResourceListSize = 18;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

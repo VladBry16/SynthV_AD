@@ -640,6 +640,9 @@
     <ClCompile Include="..\..\Source\CustomLookAndFeel.cpp">
       <Filter>SynthV_AD\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FilterDisplay.cpp">
+      <Filter>SynthV_AD\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.cpp">
       <Filter>JUCE Modules\juce_audio_basics\audio_play_head</Filter>
     </ClCompile>
@@ -3202,6 +3205,9 @@
       <Filter>SynthV_AD\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\CustomLookAndFeel.h">
+      <Filter>SynthV_AD\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FilterDisplay.h">
       <Filter>SynthV_AD\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\..\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h">
@@ -6203,6 +6209,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Source\pics\filter.png">
+      <Filter>SynthV_AD\Source\pics</Filter>
+    </None>
     <None Include="..\..\Source\pics\triangle_select.png">
       <Filter>SynthV_AD\Source\pics</Filter>
     </None>

@@ -26,6 +26,10 @@ public:
     float getSustain() const;
     float getRelease() const;
 
+    double getSampleRate() const;
+    float getHighPassFreq() const;
+    float getLowPassFreq() const;
+
     void setHighPassFreq(float freq);
     void setLowPassFreq(float freq);
 
@@ -60,6 +64,9 @@ private:
     float volume = 1.0f;
 
     int X = 1;
+
+    float highPassFreq = 20.0f;
+    float lowPassFreq = 20000.0f;
 
     std::vector<juce::dsp::IIR::Filter<float>> highPassFilters;
     std::vector<juce::dsp::IIR::Filter<float>> lowPassFilters;

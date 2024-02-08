@@ -27,6 +27,20 @@ void ADSRDisplay::paint(juce::Graphics& g)
     juce::Point<float> sustainPoint(sustainX, decayPoint.getY());
     juce::Point<float> releasePoint(releaseX, height);
 
+    // Создаем объект Path
+    juce::Path path;
+    path.startNewSubPath(0, height);
+    path.lineTo(attackPoint.getX(), attackPoint.getY());
+    path.lineTo(decayPoint.getX(), decayPoint.getY());
+    path.lineTo(sustainPoint.getX(), sustainPoint.getY());
+    path.lineTo(releasePoint.getX(), releasePoint.getY());
+    path.lineTo(width, height);
+    path.closeSubPath();
+
+    // Заливаем путь цветом
+    g.setColour(juce::Colour::fromString("32ECCA").withAlpha(0.2f));
+    g.fillPath(path);
+
     g.setColour(juce::Colour::fromString("32ECCA").withAlpha(0.5f));
     g.drawLine(0, height, attackPoint.getX(), attackPoint.getY(), 4.0f);
     g.drawLine(attackPoint.getX(), attackPoint.getY(), decayPoint.getX(), decayPoint.getY(), 4.0f);

@@ -6,6 +6,7 @@
   <MAINGROUP id="mL4z1X" name="SynthV_AD">
     <GROUP id="{1CAFA5F2-F060-8927-8CED-1526F1FDEFD5}" name="Source">
       <GROUP id="{27C552D1-0E39-440E-727D-0088FE8CB5FE}" name="pics">
+        <FILE id="FiCoxU" name="filter.png" compile="0" resource="1" file="Source/pics/filter.png"/>
         <FILE id="N6rRoC" name="triangle_select.png" compile="0" resource="1"
               file="Source/pics/triangle_select.png"/>
         <FILE id="tKad7n" name="square_select.png" compile="0" resource="1"
@@ -44,6 +45,9 @@
             file="Source/CustomLookAndFeel.cpp"/>
       <FILE id="xIpqxL" name="CustomLookAndFeel.h" compile="0" resource="0"
             file="Source/CustomLookAndFeel.h"/>
+      <FILE id="OLvXle" name="FilterDisplay.cpp" compile="1" resource="0"
+            file="Source/FilterDisplay.cpp"/>
+      <FILE id="MCuo1t" name="FilterDisplay.h" compile="0" resource="0" file="Source/FilterDisplay.h"/>
     </GROUP>
   </MAINGROUP>
   <MODULES>
