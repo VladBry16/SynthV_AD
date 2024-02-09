@@ -27,7 +27,6 @@ void ADSRDisplay::paint(juce::Graphics& g)
     juce::Point<float> sustainPoint(sustainX, decayPoint.getY());
     juce::Point<float> releasePoint(releaseX, height);
 
-    // Создаем объект Path
     juce::Path path;
     path.startNewSubPath(0, height);
     path.lineTo(attackPoint.getX(), attackPoint.getY());
@@ -37,20 +36,19 @@ void ADSRDisplay::paint(juce::Graphics& g)
     path.lineTo(width, height);
     path.closeSubPath();
 
-    // Заливаем путь цветом
     g.setColour(juce::Colour::fromString("32ECCA").withAlpha(0.2f));
     g.fillPath(path);
 
     g.setColour(juce::Colour::fromString("32ECCA").withAlpha(0.5f));
     g.drawLine(0, height, attackPoint.getX(), attackPoint.getY(), 4.0f);
     g.drawLine(attackPoint.getX(), attackPoint.getY(), decayPoint.getX(), decayPoint.getY(), 4.0f);
-    g.drawLine(decayPoint.getX(), decayPoint.getY(), sustainPoint.getX(), sustainPoint.getY(), 4.0f); // Рисуем линию Sustain
-    g.drawLine(sustainPoint.getX(), sustainPoint.getY(), releasePoint.getX(), releasePoint.getY(), 4.0f); // Рисуем линию Release
+    g.drawLine(decayPoint.getX(), decayPoint.getY(), sustainPoint.getX(), sustainPoint.getY(), 4.0f);
+    g.drawLine(sustainPoint.getX(), sustainPoint.getY(), releasePoint.getX(), releasePoint.getY(), 4.0f);
 
     g.setColour(juce::Colour::fromString("FFFFFF").withAlpha(0.9f));
     float radius = 8.0f;
     g.fillEllipse(attackPoint.getX() - radius, attackPoint.getY() - radius, 2 * radius, 2 * radius);
     g.fillEllipse(decayPoint.getX() - radius, decayPoint.getY() - radius, 2 * radius, 2 * radius);
-    g.fillEllipse(sustainPoint.getX() - radius, sustainPoint.getY() - radius, 2 * radius, 2 * radius); // Рисуем круг на Sustain
-    g.fillEllipse(releasePoint.getX() - radius, releasePoint.getY() - radius, 2 * radius, 2 * radius); // Рисуем круг внизу
+    g.fillEllipse(sustainPoint.getX() - radius, sustainPoint.getY() - radius, 2 * radius, 2 * radius);
+    g.fillEllipse(releasePoint.getX() - radius, releasePoint.getY() - radius, 2 * radius, 2 * radius);
 }

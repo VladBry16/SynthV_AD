@@ -34,7 +34,7 @@ float SynthOSC::getNextSample()
         index -= waveTable.getNumSamples();
 
     currentSample *= adsr.getNextSample();
-    time += 1.0 / sampleRate;  // Увеличиваем время
+    time += 1.0 / sampleRate;
 
     return currentSample;
 }

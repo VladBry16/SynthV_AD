@@ -8,12 +8,11 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     : AudioProcessorEditor (&p), audioProcessor (p), adsrDisplay(p.getSynth()),
     attackLabel("A - Attack", "A - Attack"), decayLabel("D - Decay", "D - Decay"),
     sustainLabel("S - Sustain", "S - Sustain"), releaseLabel("R - Release", "R - Release"), 
-    volumeLabel("Volume", "Volume"), keyboardComponent(p.getSynth().getKeyboardState(), juce::MidiKeyboardComponent::horizontalKeyboard), filterDisplay(p.getSynth())
+    volumeLabel("Volume", "Volume"), keyboardComponent(p.getSynth().getKeyboardState(), juce::MidiKeyboardComponent::horizontalKeyboard), filterDisplay(p.getSynth()),
+    lowPassLabel("LowPass", "LowPass"), highPassLabel("HighPass", "HighPass")
 {
-    // Создайте экземпляр CustomLookAndFeel
     customLookAndFeel = std::make_unique<CustomLookAndFeel>();
 
-    // Примените CustomLookAndFeel к слайдерам
     attackSlider.setLookAndFeel(customLookAndFeel.get());
     decaySlider.setLookAndFeel(customLookAndFeel.get());
     sustainSlider.setLookAndFeel(customLookAndFeel.get());
@@ -26,8 +25,8 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     frequencySlider.setLookAndFeel(customLookAndFeel.get());
     addAndMakeVisible(depthSlider);
     addAndMakeVisible(frequencySlider);
-    depthSlider.setRange(0.0, 1.0);
-    frequencySlider.setRange(0.1, 10.0);
+    depthSlider.setRange(0.0, 0.4);
+    frequencySlider.setRange(0.1, 5.0);
     depthSlider.addListener(this);
     frequencySlider.addListener(this);
     depthSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
@@ -45,15 +44,13 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     addAndMakeVisible(&lowPassFreqSlider);
 
     highPassFreqSlider.setRange(20.0, 20000.0, 0.1);
-    highPassFreqSlider.setSkewFactorFromMidPoint(1000.0); // Средняя точка, где скос должен быть равен 0.5
-
+    highPassFreqSlider.setSkewFactorFromMidPoint(1000.0);
     lowPassFreqSlider.setRange(20.0, 20000.0, 0.1);
-    lowPassFreqSlider.setSkewFactorFromMidPoint(1000.0); // Средняя точка, где скос должен быть равен 0.5
+    lowPassFreqSlider.setSkewFactorFromMidPoint(1000.0);
 
     highPassFreqSlider.setValue(audioProcessor.getSynth().getHighPassFreq());
     lowPassFreqSlider.setValue(audioProcessor.getSynth().getLowPassFreq());
 
-    // Установите диапазон, интервал и начальное значение для каждого слайдера
     attackSlider.setRange(0.0, 1.0);
     attackSlider.setValue(audioProcessor.getSynth().getAttack());
     decaySlider.setRange(0.1, 1.0);
@@ -63,36 +60,34 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     releaseSlider.setRange(0.1, 1.0);
     releaseSlider.setValue(audioProcessor.getSynth().getRelease());
 
-    volumeSlider.setRange(0.0, 1.0); // Установите диапазон для слайдера громкости
-    volumeSlider.setValue(audioProcessor.getSynth().getVolume()); // Установите начальное значение слайдера громкости
-    volumeSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0); // Уберите поле с цифрами около слайдера громкости
-    addAndMakeVisible(volumeSlider); // Добавьте слайдер громкости на ваш компонент
-    volumeSlider.addListener(this); // Добавьте слушателя для слайдера громкости
+    volumeSlider.setRange(0.0, 1.0);
+    volumeSlider.setValue(audioProcessor.getSynth().getVolume());
+    volumeSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+    addAndMakeVisible(volumeSlider);
+    volumeSlider.addListener(this);
 
-    // Уберите поле с цифрами около слайдеров
     attackSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
     decaySlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
     sustainSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
     releaseSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
 
-    // Добавьте слайдеры на ваш компонент
     addAndMakeVisible(attackSlider);
     addAndMakeVisible(decaySlider);
     addAndMakeVisible(sustainSlider);
     addAndMakeVisible(releaseSlider);
 
-    // Добавьте слушателей для слайдеров
     attackSlider.addListener(this);
     decaySlider.addListener(this);
     sustainSlider.addListener(this);
     releaseSlider.addListener(this);
 
-    // Добавьте метки на ваш компонент
     addAndMakeVisible(attackLabel);
     addAndMakeVisible(decayLabel);
     addAndMakeVisible(sustainLabel);
     addAndMakeVisible(releaseLabel);
     addAndMakeVisible(volumeLabel);
+    addAndMakeVisible(lowPassLabel);
+    addAndMakeVisible(highPassLabel);
 
     addAndMakeVisible(sineWaveButton);
     addAndMakeVisible(sawWaveButton);
@@ -101,7 +96,6 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
 
     selectWave();
 
-    // Установите идентификатор группы для каждой кнопки
     sineWaveButton.setRadioGroupId(1);
     sawWaveButton.setRadioGroupId(1);
     squareWaveButton.setRadioGroupId(1);
@@ -114,7 +108,6 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
 
     addAndMakeVisible(keyboardComponent);
 
-    // Добавление ADSRDisplay и FilterDisplay на компонент
     addAndMakeVisible(adsrDisplay);
     addAndMakeVisible(filterDisplay);
 
@@ -132,76 +125,74 @@ void SynthV_ADAudioProcessorEditor::paint(juce::Graphics& g)
     juce::Image group = juce::ImageCache::getFromMemory(BinaryData::Group_png, BinaryData::Group_pngSize);
     g.drawImageAt(group, 0, 0);
     juce::Image neon = juce::ImageCache::getFromMemory(BinaryData::Piano_png, BinaryData::Piano_pngSize);
-    int imageY = getHeight() - neon.getHeight(); // Расчет координаты Y для размещения изображения внизу
+    int imageY = getHeight() - neon.getHeight();
     g.drawImageAt(neon, 0, imageY);
     juce::Image point_1 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
-    g.drawImageAt(point_1, 532, 246);
+    g.drawImageAt(point_1, 532, 260);
     juce::Image point_2 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
-    g.drawImageAt(point_2, 635, 246);
+    g.drawImageAt(point_2, 635, 260);
     juce::Image point_3 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
-    g.drawImageAt(point_3, 738, 246);
+    g.drawImageAt(point_3, 738, 260);
     juce::Image point_4 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
-    g.drawImageAt(point_4, 841, 246);
+    g.drawImageAt(point_4, 841, 260);
     juce::Image point_5 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
     g.drawImageAt(point_5, 15, 400);
     juce::Image point_6 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
-    g.drawImageAt(point_6, 359, 169);
+    g.drawImageAt(point_6, 359, 160);
     juce::Image point_7 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
-    g.drawImageAt(point_7, 359, 275);
+    g.drawImageAt(point_7, 359, 266);
     juce::Image filter_pic = juce::ImageCache::getFromMemory(BinaryData::filter_png, BinaryData::filter_pngSize);
-    g.drawImageAt(filter_pic, 70, 169);
+    g.drawImageAt(filter_pic, 70, 160);
 }
 
 void SynthV_ADAudioProcessorEditor::resized()
 {
-    // Здесь вы можете установить положение и размер слайдеров
-    // Например:
-    int sliderSize = 80; // Увеличиваем размер слайдера
-    int padding = 10; // Отступ между слайдерами
-    int labelHeight = 20; // Высота метки
+    int sliderSize = 80;
+    int padding = 10;
+    int labelHeight = 20;
     int buttonSize = 90;
 
-    // Устанавливаем положение и размер меток и слайдеров
-    attackLabel.setBounds(532, 326, sliderSize, labelHeight);
-    attackSlider.setSliderStyle(juce::Slider::Rotary); // Устанавливаем стиль слайдера как Rotary
-    attackSlider.setBounds(532, 246, sliderSize, sliderSize);
+    attackLabel.setBounds(532, 340, sliderSize, labelHeight);
+    attackSlider.setSliderStyle(juce::Slider::Rotary);
+    attackSlider.setBounds(532, 260, sliderSize, sliderSize);
 
-    decayLabel.setBounds(635, 326, sliderSize, labelHeight);
-    decaySlider.setSliderStyle(juce::Slider::Rotary); // Устанавливаем стиль слайдера как Rotary
-    decaySlider.setBounds(635, 246, sliderSize, sliderSize);
+    decayLabel.setBounds(635, 340, sliderSize, labelHeight);
+    decaySlider.setSliderStyle(juce::Slider::Rotary);
+    decaySlider.setBounds(635, 260, sliderSize, sliderSize);
 
-    depthSlider.setBounds(100, 200, sliderSize, sliderSize);
-    frequencySlider.setBounds(100, 300, sliderSize, sliderSize);
+    depthSlider.setBounds(100, 340, sliderSize, sliderSize);
+    frequencySlider.setBounds(100, 320, sliderSize, sliderSize);
 
-    highPassFreqSlider.setBounds(359, 169, sliderSize, sliderSize);
-    lowPassFreqSlider.setBounds(359, 275, sliderSize, sliderSize);
+    highPassFreqSlider.setBounds(359, 160, sliderSize, sliderSize);
+    lowPassFreqSlider.setBounds(359, 266, sliderSize, sliderSize);
 
-    sustainLabel.setBounds(738, 326, sliderSize, labelHeight);
-    sustainSlider.setSliderStyle(juce::Slider::Rotary); // Устанавливаем стиль слайдера как Rotary
-    sustainSlider.setBounds(738, 246, sliderSize, sliderSize);
+    sustainLabel.setBounds(738, 340, sliderSize, labelHeight);
+    sustainSlider.setSliderStyle(juce::Slider::Rotary);
+    sustainSlider.setBounds(738, 260, sliderSize, sliderSize);
 
-    releaseLabel.setBounds(841, 326, sliderSize, labelHeight);
-    releaseSlider.setSliderStyle(juce::Slider::Rotary); // Устанавливаем стиль слайдера как Rotary
-    releaseSlider.setBounds(841, 246, sliderSize, sliderSize);
+    releaseLabel.setBounds(841, 340, sliderSize, labelHeight);
+    releaseSlider.setSliderStyle(juce::Slider::Rotary);
+    releaseSlider.setBounds(841, 260, sliderSize, sliderSize);
 
-    sineWaveButton.setBounds(59, 52, buttonSize, buttonSize);
-    sawWaveButton.setBounds(158, 52, buttonSize, buttonSize);
-    squareWaveButton.setBounds(257, 52, buttonSize, buttonSize);
-    triangleWaveButton.setBounds(356, 52, buttonSize, buttonSize);
+    sineWaveButton.setBounds(59, 40, buttonSize, buttonSize);
+    sawWaveButton.setBounds(158, 40, buttonSize, buttonSize);
+    squareWaveButton.setBounds(257, 40, buttonSize, buttonSize);
+    triangleWaveButton.setBounds(356, 40, buttonSize, buttonSize);
 
     volumeSlider.setSliderStyle(juce::Slider::Rotary);
     volumeSlider.setBounds(15, 400, sliderSize, sliderSize);
 
     volumeLabel.setBounds(15, 475, sliderSize, labelHeight);
+    highPassLabel.setBounds(359, 340, sliderSize, labelHeight);
+    lowPassLabel.setBounds(359, 235, sliderSize, labelHeight);
 
     auto bounds = getLocalBounds().removeFromBottom(84).reduced(100, 0);
     bounds.setX(150);
 
     keyboardComponent.setBounds(bounds);
 
-    // Установите положение и размер ADSRDisplay
     adsrDisplay.setBounds(564, 46, 330, 194);
-    filterDisplay.setBounds(70, 169, 268, 183);
+    filterDisplay.setBounds(70, 160, 268, 183);
 }
 
 void SynthV_ADAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)

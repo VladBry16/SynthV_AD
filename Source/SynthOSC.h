@@ -5,7 +5,7 @@ class SynthOSC
 {
 public:
     SynthOSC(juce::AudioSampleBuffer waveTable, double sampleRate);
-    SynthOSC(); // Конструктор по умолчанию
+    SynthOSC();
 
     void setFrequency(float frequency);
     float getNextSample();
@@ -38,10 +38,10 @@ private:
     float index = 0.f;
     float indexIncrement = 0.f;
 
-    float modDepth = 1.0f;
+    float modDepth = 0.4f;
     float modFrequency = 0.0f;
 
     float time = 0.0f;
 
-    juce::ADSR adsr;  // Экземпляр класса juce::ADSR
+    juce::ADSR adsr;
 };

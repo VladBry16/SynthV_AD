@@ -74,6 +74,8 @@ private:
     juce::Label sustainLabel{ "S - Sustain", "S - Sustain" };
     juce::Label releaseLabel{ "R - Release", "R - Release" };
     juce::Label volumeLabel{ "Volume", "Volume" };
+    juce::Label highPassLabel{ "HighPass", "HighPass" };
+    juce::Label lowPassLabel{ "LowPass", "LowPass" };
 
     juce::MidiKeyboardComponent keyboardComponent;
 
