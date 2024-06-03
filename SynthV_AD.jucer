@@ -7,7 +7,6 @@
   <MAINGROUP id="mL4z1X" name="SynthV_AD">
     <GROUP id="{1CAFA5F2-F060-8927-8CED-1526F1FDEFD5}" name="Source">
       <GROUP id="{27C552D1-0E39-440E-727D-0088FE8CB5FE}" name="pics">
-        <FILE id="FiCoxU" name="filter.png" compile="0" resource="1" file="Source/pics/filter.png"/>
         <FILE id="N6rRoC" name="triangle_select.png" compile="0" resource="1"
               file="Source/pics/triangle_select.png"/>
         <FILE id="tKad7n" name="square_select.png" compile="0" resource="1"
@@ -25,8 +24,6 @@
         <FILE id="Nr0BMp" name="triangle_on.png" compile="0" resource="1" file="Source/pics/triangle_on.png"/>
         <FILE id="c9dkAq" name="square_on.png" compile="0" resource="1" file="Source/pics/square_on.png"/>
         <FILE id="W6Tncb" name="Krutilka.png" compile="0" resource="1" file="Source/pics/Krutilka.png"/>
-        <FILE id="NNLmT7" name="Group.png" compile="0" resource="1" file="Source/pics/Group.png"/>
-        <FILE id="SOKMLZ" name="Piano.png" compile="0" resource="1" file="Source/pics/Piano.png"/>
         <FILE id="jDHdEr" name="sin_off.png" compile="0" resource="1" file="Source/pics/sin_off.png"/>
       </GROUP>
       <FILE id="n4uT8X" name="ADSRDisplay.h" compile="0" resource="0" file="Source/ADSRDisplay.h"/>

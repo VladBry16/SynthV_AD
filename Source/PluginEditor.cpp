@@ -111,7 +111,7 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     addAndMakeVisible(adsrDisplay);
     addAndMakeVisible(filterDisplay);
 
-    setSize(1000, 500);
+    setSize(1000, 631);
 }
 
 SynthV_ADAudioProcessorEditor::~SynthV_ADAudioProcessorEditor()
@@ -122,27 +122,16 @@ void SynthV_ADAudioProcessorEditor::paint(juce::Graphics& g)
 {
     juce::Image background = juce::ImageCache::getFromMemory(BinaryData::Gradient_png, BinaryData::Gradient_pngSize);
     g.drawImageAt(background, 0, 0);
-    juce::Image group = juce::ImageCache::getFromMemory(BinaryData::Group_png, BinaryData::Group_pngSize);
-    g.drawImageAt(group, 0, 0);
-    juce::Image neon = juce::ImageCache::getFromMemory(BinaryData::Piano_png, BinaryData::Piano_pngSize);
-    int imageY = getHeight() - neon.getHeight();
-    g.drawImageAt(neon, 0, imageY);
-    juce::Image point_1 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
-    g.drawImageAt(point_1, 532, 260);
-    juce::Image point_2 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
-    g.drawImageAt(point_2, 635, 260);
-    juce::Image point_3 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
-    g.drawImageAt(point_3, 738, 260);
-    juce::Image point_4 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
-    g.drawImageAt(point_4, 841, 260);
-    juce::Image point_5 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
-    g.drawImageAt(point_5, 15, 400);
-    juce::Image point_6 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
-    g.drawImageAt(point_6, 359, 160);
-    juce::Image point_7 = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
-    g.drawImageAt(point_7, 359, 266);
-    juce::Image filter_pic = juce::ImageCache::getFromMemory(BinaryData::filter_png, BinaryData::filter_pngSize);
-    g.drawImageAt(filter_pic, 70, 160);
+    juce::Image point = juce::ImageCache::getFromMemory(BinaryData::Points_png, BinaryData::Points_pngSize);
+    g.drawImageAt(point, 532, 260);
+    g.drawImageAt(point, 635, 260);
+    g.drawImageAt(point, 738, 260);
+    g.drawImageAt(point, 841, 260);
+    g.drawImageAt(point, 15, 520);
+    g.drawImageAt(point, 290, 258);
+    g.drawImageAt(point, 136, 258);
+    g.drawImageAt(point, 258, 407);
+    g.drawImageAt(point, 104, 407);
 }
 
 void SynthV_ADAudioProcessorEditor::resized()
@@ -160,11 +149,13 @@ void SynthV_ADAudioProcessorEditor::resized()
     decaySlider.setSliderStyle(juce::Slider::Rotary);
     decaySlider.setBounds(635, 260, sliderSize, sliderSize);
 
-    depthSlider.setBounds(100, 340, sliderSize, sliderSize);
-    frequencySlider.setBounds(100, 320, sliderSize, sliderSize);
+    depthSlider.setBounds(258, 407, sliderSize, sliderSize);
+    frequencySlider.setBounds(104, 407, sliderSize, sliderSize);
+    depthSlider.setSliderStyle(juce::Slider::Rotary);
+    frequencySlider.setSliderStyle(juce::Slider::Rotary);
 
-    highPassFreqSlider.setBounds(359, 160, sliderSize, sliderSize);
-    lowPassFreqSlider.setBounds(359, 266, sliderSize, sliderSize);
+    highPassFreqSlider.setBounds(136, 258, sliderSize, sliderSize);
+    lowPassFreqSlider.setBounds(290, 258, sliderSize, sliderSize);
 
     sustainLabel.setBounds(738, 340, sliderSize, labelHeight);
     sustainSlider.setSliderStyle(juce::Slider::Rotary);
@@ -174,25 +165,25 @@ void SynthV_ADAudioProcessorEditor::resized()
     releaseSlider.setSliderStyle(juce::Slider::Rotary);
     releaseSlider.setBounds(841, 260, sliderSize, sliderSize);
 
-    sineWaveButton.setBounds(59, 40, buttonSize, buttonSize);
-    sawWaveButton.setBounds(158, 40, buttonSize, buttonSize);
-    squareWaveButton.setBounds(257, 40, buttonSize, buttonSize);
-    triangleWaveButton.setBounds(356, 40, buttonSize, buttonSize);
+    sineWaveButton.setBounds(447, 405, buttonSize, buttonSize);
+    sawWaveButton.setBounds(571, 405, buttonSize, buttonSize);
+    squareWaveButton.setBounds(695, 405, buttonSize, buttonSize);
+    triangleWaveButton.setBounds(819, 405, buttonSize, buttonSize);
 
     volumeSlider.setSliderStyle(juce::Slider::Rotary);
-    volumeSlider.setBounds(15, 400, sliderSize, sliderSize);
+    volumeSlider.setBounds(15, 520, sliderSize, sliderSize);
 
-    volumeLabel.setBounds(15, 475, sliderSize, labelHeight);
-    highPassLabel.setBounds(359, 340, sliderSize, labelHeight);
-    lowPassLabel.setBounds(359, 235, sliderSize, labelHeight);
+    volumeLabel.setBounds(15, 600, sliderSize, labelHeight);
+    highPassLabel.setBounds(290, 338, sliderSize, labelHeight);
+    lowPassLabel.setBounds(136, 338, sliderSize, labelHeight);
 
     auto bounds = getLocalBounds().removeFromBottom(84).reduced(100, 0);
-    bounds.setX(150);
+    bounds.setX(145);
 
     keyboardComponent.setBounds(bounds);
 
     adsrDisplay.setBounds(564, 46, 330, 194);
-    filterDisplay.setBounds(70, 160, 268, 183);
+    filterDisplay.setBounds(88, 46, 330, 194);
 }
 
 void SynthV_ADAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)

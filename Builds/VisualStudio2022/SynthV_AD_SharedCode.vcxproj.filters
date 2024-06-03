@@ -6209,9 +6209,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Source\pics\filter.png">
-      <Filter>SynthV_AD\Source\pics</Filter>
-    </None>
     <None Include="..\..\Source\pics\triangle_select.png">
       <Filter>SynthV_AD\Source\pics</Filter>
     </None>
@@ -6252,12 +6249,6 @@
       <Filter>SynthV_AD\Source\pics</Filter>
     </None>
     <None Include="..\..\Source\pics\Krutilka.png">
-      <Filter>SynthV_AD\Source\pics</Filter>
-    </None>
-    <None Include="..\..\Source\pics\Group.png">
-      <Filter>SynthV_AD\Source\pics</Filter>
-    </None>
-    <None Include="..\..\Source\pics\Piano.png">
       <Filter>SynthV_AD\Source\pics</Filter>
     </None>
     <None Include="..\..\Source\pics\sin_off.png">

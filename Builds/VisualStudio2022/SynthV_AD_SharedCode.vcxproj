@@ -3527,7 +3527,6 @@
     <ClInclude Include="..\..\JuceLibraryCode\JucePluginDefines.h"/>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Source\pics\filter.png"/>
     <None Include="..\..\Source\pics\triangle_select.png"/>
     <None Include="..\..\Source\pics\square_select.png"/>
     <None Include="..\..\Source\pics\sin_select.png"/>
@@ -3542,8 +3541,6 @@
     <None Include="..\..\Source\pics\triangle_on.png"/>
     <None Include="..\..\Source\pics\square_on.png"/>
     <None Include="..\..\Source\pics\Krutilka.png"/>
-    <None Include="..\..\Source\pics\Group.png"/>
-    <None Include="..\..\Source\pics\Piano.png"/>
     <None Include="..\..\Source\pics\sin_off.png"/>
     <None Include="..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt"/>
     <None Include="..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\README.md"/>

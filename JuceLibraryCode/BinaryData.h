@@ -8,9 +8,6 @@
 
 namespace BinaryData
 {
-    extern const char*   filter_png;
-    const int            filter_pngSize = 4116;
-
     extern const char*   triangle_select_png;
     const int            triangle_select_pngSize = 18367;
 
@@ -24,7 +21,7 @@ namespace BinaryData
     const int            saw_select_pngSize = 18708;
 
     extern const char*   Gradient_png;
-    const int            Gradient_pngSize = 936172;
+    const int            Gradient_pngSize = 835281;
 
     extern const char*   square_off_png;
     const int            square_off_pngSize = 17180;
@@ -53,17 +50,11 @@ namespace BinaryData
     extern const char*   Krutilka_png;
     const int            Krutilka_pngSize = 13033;
 
-    extern const char*   Group_png;
-    const int            Group_pngSize = 179275;
-
-    extern const char*   Piano_png;
-    const int            Piano_pngSize = 142932;
-
     extern const char*   sin_off_png;
     const int            sin_off_pngSize = 16389;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 18;
+    const int namedResourceListSize = 15;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];
