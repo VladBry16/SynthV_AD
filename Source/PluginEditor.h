@@ -76,6 +76,8 @@ private:
     juce::Label volumeLabel{ "Volume", "Volume" };
     juce::Label highPassLabel{ "HighPass", "HighPass" };
     juce::Label lowPassLabel{ "LowPass", "LowPass" };
+    juce::Label dethLabel{ "Deth", "Deth" };
+    juce::Label frequncyLabel{ "Frequncy", "Frequncy" };
 
     juce::MidiKeyboardComponent keyboardComponent;
 

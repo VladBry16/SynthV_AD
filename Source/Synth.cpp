@@ -315,6 +315,20 @@ float Synth::getVolume() const {
 	return volume;
 }
 
+float Synth::getModulationFrequency() {
+	if (oscillators.empty())
+		return 0.0f;
+
+	return oscillators[0].getModulationFrequency();
+}
+
+float Synth::getModulationDepth() {
+	if (oscillators.empty())
+		return 0.0f;
+
+	return oscillators[0].getModulationDepth();
+}
+
 void Synth::setModulationDepth(float newDepth) { 
 	for (auto& oscillator : oscillators)
 	{

@@ -30,6 +30,9 @@ public:
     float getHighPassFreq() const;
     float getLowPassFreq() const;
 
+    float getModulationFrequency();
+    float getModulationDepth();
+
     void setHighPassFreq(float freq);
     void setLowPassFreq(float freq);
 

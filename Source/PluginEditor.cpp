@@ -9,7 +9,7 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     attackLabel("A - Attack", "A - Attack"), decayLabel("D - Decay", "D - Decay"),
     sustainLabel("S - Sustain", "S - Sustain"), releaseLabel("R - Release", "R - Release"), 
     volumeLabel("Volume", "Volume"), keyboardComponent(p.getSynth().getKeyboardState(), juce::MidiKeyboardComponent::horizontalKeyboard), filterDisplay(p.getSynth()),
-    lowPassLabel("LowPass", "LowPass"), highPassLabel("HighPass", "HighPass")
+    lowPassLabel("LowPass", "LowPass"), highPassLabel("HighPass", "HighPass"), dethLabel("Deth", "Deth"), frequncyLabel("Frequncy", "Frequncy")
 {
     customLookAndFeel = std::make_unique<CustomLookAndFeel>();
 
@@ -25,8 +25,8 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     frequencySlider.setLookAndFeel(customLookAndFeel.get());
     addAndMakeVisible(depthSlider);
     addAndMakeVisible(frequencySlider);
-    depthSlider.setRange(0.0, 0.4);
-    frequencySlider.setRange(0.1, 5.0);
+    depthSlider.setRange(0.0, 1.0);
+    frequencySlider.setRange(0.1, 10.0);
     depthSlider.addListener(this);
     frequencySlider.addListener(this);
     depthSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
@@ -50,6 +50,8 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
 
     highPassFreqSlider.setValue(audioProcessor.getSynth().getHighPassFreq());
     lowPassFreqSlider.setValue(audioProcessor.getSynth().getLowPassFreq());
+    depthSlider.setValue(audioProcessor.getSynth().getModulationDepth());
+    frequencySlider.setValue(audioProcessor.getSynth().getModulationFrequency());
 
     attackSlider.setRange(0.0, 1.0);
     attackSlider.setValue(audioProcessor.getSynth().getAttack());
@@ -88,6 +90,8 @@ SynthV_ADAudioProcessorEditor::SynthV_ADAudioProcessorEditor (SynthV_ADAudioProc
     addAndMakeVisible(volumeLabel);
     addAndMakeVisible(lowPassLabel);
     addAndMakeVisible(highPassLabel);
+    addAndMakeVisible(dethLabel);
+    addAndMakeVisible(frequncyLabel);
 
     addAndMakeVisible(sineWaveButton);
     addAndMakeVisible(sawWaveButton);
@@ -172,6 +176,9 @@ void SynthV_ADAudioProcessorEditor::resized()
 
     volumeSlider.setSliderStyle(juce::Slider::Rotary);
     volumeSlider.setBounds(15, 520, sliderSize, sliderSize);
+
+    dethLabel.setBounds(258, 487, sliderSize, labelHeight);
+    frequncyLabel.setBounds(104, 487, sliderSize, labelHeight);
 
     volumeLabel.setBounds(15, 600, sliderSize, labelHeight);
     highPassLabel.setBounds(290, 338, sliderSize, labelHeight);
